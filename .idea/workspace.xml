@@ -19,19 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15a1754e-7b77-4842-a199-653b86ee2f34" name="Default Changelist" comment="update">
-      <change beforePath="$PROJECT_DIR$/../q/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/common/ast.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/common/exception.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/go.mod" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/go.sum" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/internal/queryparser.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/internal/queryparser.y" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/internal/y.output" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/main.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../q/tests/main_test.go" beforeDir="false" />
-    </list>
+    <list default="true" id="15a1754e-7b77-4842-a199-653b86ee2f34" name="Default Changelist" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +34,7 @@
   </component>
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
@@ -153,7 +141,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="refactor" />
     <MESSAGE value="fix pointers bug in ast" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix pointers bug in ast" />
+    <MESSAGE value="change internal" />
+    <option name="LAST_COMMIT_MESSAGE" value="change internal" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -211,6 +200,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="1860" height="302" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213946" />
+    <state x="235" y="73" key="Vcs.Push.Dialog.v2" timestamp="1593509492827">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="235" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1593509492827" />
     <state x="518" y="244" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1592391956311">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -230,32 +223,32 @@
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>617</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>624</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>596</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>603</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>602</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>604</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
@@ -264,37 +257,37 @@
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>589</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>582</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>598</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>612</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>437</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>586</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
           <line>441</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
