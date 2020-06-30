@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="15a1754e-7b77-4842-a199-653b86ee2f34" name="Default Changelist" comment="update">
+      <change beforePath="$PROJECT_DIR$/tests/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main_test.go" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="ProjectId" id="1dOdrikgmF7PGxFJkWEpqxuCBJA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="GO_FMT" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\data\develop\go\src\queryparser\common" />
+      <recent name="C:\data\develop\go\src\queryparser\internal" />
+      <recent name="C:\data\develop\go\src\query-parser\tests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.go test queryparser/tests (1)">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="query-parser" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <package value="query-parser" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build query-parser" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="query-parser" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/queryparser.go" />
+      <package value="query-parser" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build queryparser/tests" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="query-parser" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/tests/main.go" />
+      <package value="queryparser/tests" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test queryparser/tests (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="queryparser" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="queryparser/tests" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test queryparser/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="query-parser" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="queryparser/tests" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.go test queryparser/tests (1)" />
+        <item itemvalue="Go Test.go test queryparser/tests" />
+        <item itemvalue="Go Build.go build queryparser/tests" />
+        <item itemvalue="Go Build.go build main.go" />
+        <item itemvalue="Go Build.go build query-parser" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update" />
+    <MESSAGE value="refactor" />
+    <MESSAGE value="fix pointers bug in ast" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix pointers bug in ast" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="715" y="317" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592392591128">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="715" y="317" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1592392591128" />
+    <state x="673" y="142" key="#go_build_main.go" timestamp="1592392623864">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="673" y="142" key="#go_build_main.go/0.0.1920.1032@0.0.1920.1032" timestamp="1592392623864" />
+    <state x="1213" y="261" width="520" height="494" key="#xdebugger.XInspectDialog" timestamp="1592425283626">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="1213" y="261" width="520" height="494" key="#xdebugger.XInspectDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592425283626" />
+    <state x="719" y="218" key="#xdebugger.evaluate" timestamp="1592425759852">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="719" y="218" key="#xdebugger.evaluate/0.0.1920.1032@0.0.1920.1032" timestamp="1592425759852" />
+    <state width="639" height="466" key="DebuggerActiveHint" timestamp="1592426603316">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="639" height="466" key="DebuggerActiveHint/0.0.1920.1032@0.0.1920.1032" timestamp="1592426603316" />
+    <state width="1860" height="302" key="GridCell.Tab.0.bottom" timestamp="1592559213945">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
+    <state width="1860" height="302" key="GridCell.Tab.0.center" timestamp="1592559213945">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
+    <state width="1860" height="302" key="GridCell.Tab.0.left" timestamp="1592559213945">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
+    <state width="1860" height="302" key="GridCell.Tab.0.right" timestamp="1592559213945">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
+    <state width="1860" height="302" key="GridCell.Tab.1.bottom" timestamp="1592559213946">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213946" />
+    <state width="1860" height="302" key="GridCell.Tab.1.center" timestamp="1592559213945">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
+    <state width="1860" height="302" key="GridCell.Tab.1.left" timestamp="1592559213945">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
+    <state width="1860" height="302" key="GridCell.Tab.1.right" timestamp="1592559213946">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1860" height="302" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213946" />
+    <state x="518" y="244" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1592391956311">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="518" y="244" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1032@0.0.1920.1032" timestamp="1592391956311" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/tests/main_test.go</url>
+          <line>20</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/common/ast.go</url>
+          <line>46</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>617</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>624</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>596</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>603</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>602</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>604</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/tests/main_test.go</url>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>589</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>582</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>598</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>612</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>437</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>586</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/queryparser.go</url>
+          <line>441</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="GoTestRunConfiguration">
+        <watch expression="*(*&quot;void&quot;)(0)" language="go" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

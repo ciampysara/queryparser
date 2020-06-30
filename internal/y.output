@@ -1,0 +1,342 @@
+
+state 0
+	$accept: .expr $end 
+
+	IDENT  shift 5
+	LPAREN  shift 3
+	NOT  shift 4
+	.  error
+
+	expr  goto 1
+	condition  goto 2
+
+state 1
+	$accept:  expr.$end 
+	expr:  expr.AND expr 
+	expr:  expr.OR expr 
+
+	$end  accept
+	AND  shift 6
+	OR  shift 7
+	.  error
+
+
+state 2
+	expr:  condition.    (1)
+
+	.  reduce 1 (src line 60)
+
+
+state 3
+	expr:  LPAREN.expr RPAREN 
+
+	IDENT  shift 5
+	LPAREN  shift 3
+	NOT  shift 4
+	.  error
+
+	expr  goto 8
+	condition  goto 2
+
+state 4
+	expr:  NOT.expr 
+
+	IDENT  shift 5
+	LPAREN  shift 3
+	NOT  shift 4
+	.  error
+
+	expr  goto 9
+	condition  goto 2
+
+state 5
+	condition:  IDENT.EQ STRING 
+	condition:  IDENT.NEQ STRING 
+	condition:  IDENT.LIKE STRING 
+	condition:  IDENT.NLIKE STRING 
+	condition:  IDENT.EQ BOOL 
+	condition:  IDENT.NEQ BOOL 
+	condition:  IDENT.EQ INT 
+	condition:  IDENT.NEQ INT 
+	condition:  IDENT.EQ FLOAT 
+	condition:  IDENT.NEQ FLOAT 
+	condition:  IDENT.GT INT 
+	condition:  IDENT.LT INT 
+	condition:  IDENT.GT FLOAT 
+	condition:  IDENT.LT FLOAT 
+	condition:  IDENT.GTE INT 
+	condition:  IDENT.LTE INT 
+	condition:  IDENT.GTE FLOAT 
+	condition:  IDENT.LTE FLOAT 
+
+	EQ  shift 10
+	NEQ  shift 11
+	LT  shift 15
+	GT  shift 14
+	LTE  shift 17
+	GTE  shift 16
+	LIKE  shift 12
+	NLIKE  shift 13
+	.  error
+
+
+state 6
+	expr:  expr AND.expr 
+
+	IDENT  shift 5
+	LPAREN  shift 3
+	NOT  shift 4
+	.  error
+
+	expr  goto 18
+	condition  goto 2
+
+state 7
+	expr:  expr OR.expr 
+
+	IDENT  shift 5
+	LPAREN  shift 3
+	NOT  shift 4
+	.  error
+
+	expr  goto 19
+	condition  goto 2
+
+state 8
+	expr:  LPAREN expr.RPAREN 
+	expr:  expr.AND expr 
+	expr:  expr.OR expr 
+
+	RPAREN  shift 20
+	AND  shift 6
+	OR  shift 7
+	.  error
+
+
+state 9
+	expr:  NOT expr.    (3)
+	expr:  expr.AND expr 
+	expr:  expr.OR expr 
+
+	.  reduce 3 (src line 71)
+
+
+state 10
+	condition:  IDENT EQ.STRING 
+	condition:  IDENT EQ.BOOL 
+	condition:  IDENT EQ.INT 
+	condition:  IDENT EQ.FLOAT 
+
+	STRING  shift 21
+	INT  shift 23
+	FLOAT  shift 24
+	BOOL  shift 22
+	.  error
+
+
+state 11
+	condition:  IDENT NEQ.STRING 
+	condition:  IDENT NEQ.BOOL 
+	condition:  IDENT NEQ.INT 
+	condition:  IDENT NEQ.FLOAT 
+
+	STRING  shift 25
+	INT  shift 27
+	FLOAT  shift 28
+	BOOL  shift 26
+	.  error
+
+
+state 12
+	condition:  IDENT LIKE.STRING 
+
+	STRING  shift 29
+	.  error
+
+
+state 13
+	condition:  IDENT NLIKE.STRING 
+
+	STRING  shift 30
+	.  error
+
+
+state 14
+	condition:  IDENT GT.INT 
+	condition:  IDENT GT.FLOAT 
+
+	INT  shift 31
+	FLOAT  shift 32
+	.  error
+
+
+state 15
+	condition:  IDENT LT.INT 
+	condition:  IDENT LT.FLOAT 
+
+	INT  shift 33
+	FLOAT  shift 34
+	.  error
+
+
+state 16
+	condition:  IDENT GTE.INT 
+	condition:  IDENT GTE.FLOAT 
+
+	INT  shift 35
+	FLOAT  shift 36
+	.  error
+
+
+state 17
+	condition:  IDENT LTE.INT 
+	condition:  IDENT LTE.FLOAT 
+
+	INT  shift 37
+	FLOAT  shift 38
+	.  error
+
+
+state 18
+	expr:  expr.AND expr 
+	expr:  expr AND expr.    (4)
+	expr:  expr.OR expr 
+
+	OR  shift 7
+	.  reduce 4 (src line 75)
+
+
+state 19
+	expr:  expr.AND expr 
+	expr:  expr.OR expr 
+	expr:  expr OR expr.    (5)
+
+	.  reduce 5 (src line 80)
+
+
+state 20
+	expr:  LPAREN expr RPAREN.    (2)
+
+	.  reduce 2 (src line 65)
+
+
+state 21
+	condition:  IDENT EQ STRING.    (6)
+
+	.  reduce 6 (src line 87)
+
+
+state 22
+	condition:  IDENT EQ BOOL.    (10)
+
+	.  reduce 10 (src line 103)
+
+
+state 23
+	condition:  IDENT EQ INT.    (12)
+
+	.  reduce 12 (src line 111)
+
+
+state 24
+	condition:  IDENT EQ FLOAT.    (14)
+
+	.  reduce 14 (src line 119)
+
+
+state 25
+	condition:  IDENT NEQ STRING.    (7)
+
+	.  reduce 7 (src line 91)
+
+
+state 26
+	condition:  IDENT NEQ BOOL.    (11)
+
+	.  reduce 11 (src line 107)
+
+
+state 27
+	condition:  IDENT NEQ INT.    (13)
+
+	.  reduce 13 (src line 115)
+
+
+state 28
+	condition:  IDENT NEQ FLOAT.    (15)
+
+	.  reduce 15 (src line 123)
+
+
+state 29
+	condition:  IDENT LIKE STRING.    (8)
+
+	.  reduce 8 (src line 95)
+
+
+state 30
+	condition:  IDENT NLIKE STRING.    (9)
+
+	.  reduce 9 (src line 99)
+
+
+state 31
+	condition:  IDENT GT INT.    (16)
+
+	.  reduce 16 (src line 127)
+
+
+state 32
+	condition:  IDENT GT FLOAT.    (18)
+
+	.  reduce 18 (src line 135)
+
+
+state 33
+	condition:  IDENT LT INT.    (17)
+
+	.  reduce 17 (src line 131)
+
+
+state 34
+	condition:  IDENT LT FLOAT.    (19)
+
+	.  reduce 19 (src line 139)
+
+
+state 35
+	condition:  IDENT GTE INT.    (20)
+
+	.  reduce 20 (src line 143)
+
+
+state 36
+	condition:  IDENT GTE FLOAT.    (22)
+
+	.  reduce 22 (src line 151)
+
+
+state 37
+	condition:  IDENT LTE INT.    (21)
+
+	.  reduce 21 (src line 147)
+
+
+state 38
+	condition:  IDENT LTE FLOAT.    (23)
+
+	.  reduce 23 (src line 155)
+
+
+21 terminals, 3 nonterminals
+24 grammar rules, 39/8000 states
+0 shift/reduce, 0 reduce/reduce conflicts reported
+52 working sets used
+memory: parser 9/120000
+8 extra closures
+47 shift entries, 1 exceptions
+6 goto entries
+4 entries saved by goto default
+Optimizer space used: output 42/120000
+42 table entries, 1 zero
+maximum spread: 21, maximum offset: 19
