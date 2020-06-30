@@ -3,7 +3,7 @@
 
 %{
 
-package internal
+package parser
 
 import (
 

@@ -2,7 +2,7 @@
 
 //line queryparser.y:5
 
-package internal
+package parser
 
 import __yyfmt__ "fmt"
 
@@ -411,7 +411,7 @@ func (Queryrcvr *QueryParserImpl) Parse(Querylex QueryLexer) int {
 	Errflag := 0 /* error recovery flag */
 	Querystate := 0
 	Queryrcvr.char = -1
-	Querytoken := -1 // Queryrcvr.char translated into internal numbering
+	Querytoken := -1 // Queryrcvr.char translated into parser numbering
 	defer func() {
 		// Make sure we report no lookahead when not parsing.
 		Querystate = -1

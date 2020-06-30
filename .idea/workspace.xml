@@ -20,7 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="15a1754e-7b77-4842-a199-653b86ee2f34" name="Default Changelist" comment="update">
-      <change beforePath="$PROJECT_DIR$/tests/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/common/ast.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/common/exception.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/internal/queryparser.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/internal/queryparser.y" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/internal/y.output" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../q/tests/main_test.go" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +46,7 @@
   </component>
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />

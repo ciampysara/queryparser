@@ -2,15 +2,15 @@ package queryparser
 
 import (
 	"queryparser/common"
-	"queryparser/internal"
+	"queryparser/parser"
 
 	"strings"
 )
 
 func Parse(qs string) (*common.Expression, *common.Exception) {
-	q := internal.QueryLexerImpl{}
+	q := parser.QueryLexerImpl{}
 	q.Init(strings.NewReader(qs))
-	internal.QueryParse(&q)
+	parser.QueryParse(&q)
 	if q.ErrorCount > 0 {
 		return nil, &q.Errors[0]
 	}
