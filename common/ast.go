@@ -1,18 +1,24 @@
 package common
 
+import "fmt"
+
 type Token struct {
 	Token   int
 	Literal string
 }
-
+type TokenValue struct {
+	Token   int
+	Content interface{}
+}
 type Condition struct {
 	Variable   Token
 	Comparator Token
-	Value      Token
+	Value      TokenValue
 }
 
 func (l Condition) String() string {
-	return l.Variable.Literal + " " + l.Comparator.Literal + " " + l.Value.Literal
+	str := fmt.Sprintf("%v", l.Value.Content)
+	return l.Variable.Literal + " " + l.Comparator.Literal + " " + str
 }
 
 type Expression interface {

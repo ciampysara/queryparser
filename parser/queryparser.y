@@ -14,6 +14,7 @@ import (
      "strings"
      "unicode"
 	"text/scanner"
+	"strconv"
 	"github.com/publicocean0/queryparser/common"
 )
 
@@ -26,6 +27,7 @@ import (
 	expr  common.Expression
     cond common.Condition
 	token common.Token
+
 }
 
 %token <token> IDENT
@@ -86,75 +88,101 @@ expr : condition {
 
 condition :  IDENT EQ STRING 
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:$3.Literal}}
 } 
 | IDENT NEQ STRING 
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:$3.Literal}}
 } 
 | IDENT LIKE STRING 
 {
-$$ =common.Condition{Variable:$1,Comparator:$2,Value:$3}
+$$ =common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:$3.Literal}}
 } 
 | IDENT NLIKE STRING 
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:$3.Literal}}
 } 
 | IDENT EQ BOOL 
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+b, _ := strconv.ParseBool($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:b}}
 } 
 | IDENT NEQ BOOL
 {
- $$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+b, _ := strconv.ParseBool($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:b}}
 }
 | IDENT EQ INT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+i, _ := strconv.ParseInt($3.Literal, 10, 64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
+
 }
 | IDENT NEQ INT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+i, _ := strconv.ParseInt($3.Literal, 10, 64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
+
 }
 | IDENT EQ FLOAT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+f, _ := strconv.ParseFloat($3.Literal,  64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
+
 }
 | IDENT NEQ FLOAT
 {
-$$ =common. Condition{Variable:$1,Comparator:$2,Value:$3}
+f, _ := strconv.ParseFloat($3.Literal,  64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
+
 }
 | IDENT GT INT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+i, _ := strconv.ParseInt($3.Literal, 10, 64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
+
 }
 | IDENT LT INT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+i, _ := strconv.ParseInt($3.Literal, 10, 64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
+
 }
 | IDENT GT FLOAT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+f, _ := strconv.ParseFloat($3.Literal,  64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
+
 }
 | IDENT LT FLOAT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+f, _ := strconv.ParseFloat($3.Literal,  64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
+
 }
 | IDENT GTE INT
 {
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:$3}
+i, _ := strconv.ParseInt($3.Literal, 10, 64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
+
 }
 | IDENT LTE INT
 {
-$$ =common. Condition{Variable:$1,Comparator:$2,Value:$3}
+i, _ := strconv.ParseInt($3.Literal, 10, 64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
+
 }
 | IDENT GTE FLOAT
 {
-$$ =common. Condition{Variable:$1,Comparator:$2,Value:$3}
+f, _ := strconv.ParseFloat($3.Literal,  64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
+
 }
 | IDENT LTE FLOAT
 {
-$$ =common. Condition{Variable:$1,Comparator:$2,Value:$3}
+f, _ := strconv.ParseFloat($3.Literal,  64)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
+
 };
 
 

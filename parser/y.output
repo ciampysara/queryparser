@@ -24,7 +24,7 @@ state 1
 state 2
 	expr:  condition.    (1)
 
-	.  reduce 1 (src line 60)
+	.  reduce 1 (src line 62)
 
 
 state 3
@@ -118,7 +118,7 @@ state 9
 	expr:  expr.AND expr 
 	expr:  expr.OR expr 
 
-	.  reduce 3 (src line 71)
+	.  reduce 3 (src line 73)
 
 
 state 10
@@ -203,7 +203,7 @@ state 18
 	expr:  expr.OR expr 
 
 	OR  shift 7
-	.  reduce 4 (src line 75)
+	.  reduce 4 (src line 77)
 
 
 state 19
@@ -211,121 +211,121 @@ state 19
 	expr:  expr.OR expr 
 	expr:  expr OR expr.    (5)
 
-	.  reduce 5 (src line 80)
+	.  reduce 5 (src line 82)
 
 
 state 20
 	expr:  LPAREN expr RPAREN.    (2)
 
-	.  reduce 2 (src line 65)
+	.  reduce 2 (src line 67)
 
 
 state 21
 	condition:  IDENT EQ STRING.    (6)
 
-	.  reduce 6 (src line 87)
+	.  reduce 6 (src line 89)
 
 
 state 22
 	condition:  IDENT EQ BOOL.    (10)
 
-	.  reduce 10 (src line 103)
+	.  reduce 10 (src line 105)
 
 
 state 23
 	condition:  IDENT EQ INT.    (12)
 
-	.  reduce 12 (src line 111)
+	.  reduce 12 (src line 115)
 
 
 state 24
 	condition:  IDENT EQ FLOAT.    (14)
 
-	.  reduce 14 (src line 119)
+	.  reduce 14 (src line 127)
 
 
 state 25
 	condition:  IDENT NEQ STRING.    (7)
 
-	.  reduce 7 (src line 91)
+	.  reduce 7 (src line 93)
 
 
 state 26
 	condition:  IDENT NEQ BOOL.    (11)
 
-	.  reduce 11 (src line 107)
+	.  reduce 11 (src line 110)
 
 
 state 27
 	condition:  IDENT NEQ INT.    (13)
 
-	.  reduce 13 (src line 115)
+	.  reduce 13 (src line 121)
 
 
 state 28
 	condition:  IDENT NEQ FLOAT.    (15)
 
-	.  reduce 15 (src line 123)
+	.  reduce 15 (src line 133)
 
 
 state 29
 	condition:  IDENT LIKE STRING.    (8)
 
-	.  reduce 8 (src line 95)
+	.  reduce 8 (src line 97)
 
 
 state 30
 	condition:  IDENT NLIKE STRING.    (9)
 
-	.  reduce 9 (src line 99)
+	.  reduce 9 (src line 101)
 
 
 state 31
 	condition:  IDENT GT INT.    (16)
 
-	.  reduce 16 (src line 127)
+	.  reduce 16 (src line 139)
 
 
 state 32
 	condition:  IDENT GT FLOAT.    (18)
 
-	.  reduce 18 (src line 135)
+	.  reduce 18 (src line 151)
 
 
 state 33
 	condition:  IDENT LT INT.    (17)
 
-	.  reduce 17 (src line 131)
+	.  reduce 17 (src line 145)
 
 
 state 34
 	condition:  IDENT LT FLOAT.    (19)
 
-	.  reduce 19 (src line 139)
+	.  reduce 19 (src line 157)
 
 
 state 35
 	condition:  IDENT GTE INT.    (20)
 
-	.  reduce 20 (src line 143)
+	.  reduce 20 (src line 163)
 
 
 state 36
 	condition:  IDENT GTE FLOAT.    (22)
 
-	.  reduce 22 (src line 151)
+	.  reduce 22 (src line 175)
 
 
 state 37
 	condition:  IDENT LTE INT.    (21)
 
-	.  reduce 21 (src line 147)
+	.  reduce 21 (src line 169)
 
 
 state 38
 	condition:  IDENT LTE FLOAT.    (23)
 
-	.  reduce 23 (src line 155)
+	.  reduce 23 (src line 181)
 
 
 21 terminals, 3 nonterminals
