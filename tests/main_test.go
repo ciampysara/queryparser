@@ -2,7 +2,7 @@ package tests
 
 import (
 	"fmt"
-	"queryparser"
+	"github.com/publicocean0/queryparser"
 	"testing"
 )
 

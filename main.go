@@ -1,8 +1,8 @@
 package queryparser
 
 import (
-	"queryparser/common"
-	"queryparser/parser"
+	"github.com/publicocean0/queryparser/common"
+	"github.com/publicocean0/queryparser/parser"
 
 	"strings"
 )

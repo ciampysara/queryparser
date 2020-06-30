@@ -9,8 +9,8 @@ import __yyfmt__ "fmt"
 //line queryparser.y:6
 
 import (
+	"github.com/publicocean0/queryparser/common"
 	"io"
-	"queryparser/common"
 	"strings"
 	"text/scanner"
 	"unicode"

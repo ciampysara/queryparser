@@ -14,7 +14,7 @@ import (
      "strings"
      "unicode"
 	"text/scanner"
-	"queryparser/common"
+	"github.com/publicocean0/queryparser/common"
 )
 
 
