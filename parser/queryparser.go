@@ -40,6 +40,9 @@ const NOT = 57360
 const OR = 57361
 const LIKE = 57362
 const NLIKE = 57363
+const DATE = 57364
+const DATETIME = 57365
+const TIME = 57366
 
 var QueryToknames = [...]string{
 	"$end",
@@ -63,6 +66,9 @@ var QueryToknames = [...]string{
 	"OR",
 	"LIKE",
 	"NLIKE",
+	"DATE",
+	"DATETIME",
+	"TIME",
 }
 var QueryStatenames = [...]string{}
 
@@ -74,17 +80,17 @@ const QueryInitialStackSize = 16
 /*  start  of  programs  */
 
 type QueryLexerImpl struct {
-	src    string
-	pos    int
-	re     *regexp.Regexp
-	Errors []common.Exception
-	AST    common.Expression
+	src       string
+	pos       int
+	re        *regexp.Regexp
+	Exception *common.Exception
+	AST       common.Expression
 }
 
 func (l *QueryLexerImpl) Init(src string) {
 	l.src = src
 	l.pos = 0
-	l.re = regexp.MustCompile(`(?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"[^"]+\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{1,2}\-\d{1,2})(T\d{1,2}\:\d{2}(\:\d{2})?)?)|(\d{1,2}\:\d{2}(\:\d{2}(\:\d{2})?)))|(?P<number>([-+]?\d+)(\.\d+)?)`)
+	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"[^"]+\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{1,2}\-\d{1,2})(T\d{1,2}\:\d{2}(\:\d{2})?)?)|(\d{1,2}\:\d{2}(\:\d{2}(\:\d{2})?)))|(?P<number>([-+]?\d+)(\.\d+)?))`)
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
@@ -104,7 +110,11 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 	}
 	//find the leftmost token (and its subtokens)
 	result := l.re.FindSubmatchIndex([]byte(l.src[l.pos:]))
-
+	if result == nil {
+		l.Exception = &common.Exception{}
+		l.Exception.Init(l.pos, "invalid syntax at "+l.src[l.pos:])
+		return -1
+	}
 	for pairIndex := 2; t == -1 && pairIndex < 68; pairIndex += 2 {
 
 		rstart := result[pairIndex]
@@ -112,35 +122,35 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 			start := l.pos + result[pairIndex]
 			switch pairIndex {
 			// comparator
-			case 16:
+			case 18:
 				t = NEQ
 				lval.token = common.Token{Token: start, Literal: "!="}
 				break
-			case 18:
+			case 20:
 				t = NLIKE
 				lval.token = common.Token{Token: start, Literal: "!~"}
 				break
-			case 20:
+			case 22:
 				t = LTE
 				lval.token = common.Token{Token: start, Literal: "<="}
 				break
-			case 22:
+			case 24:
 				t = GTE
 				lval.token = common.Token{Token: start, Literal: ">="}
 				break
-			case 24:
+			case 26:
 				t = EQ
 				lval.token = common.Token{Token: start, Literal: "="}
 				break
-			case 26:
+			case 28:
 				t = LIKE
 				lval.token = common.Token{Token: start, Literal: "~"}
 				break
-			case 28:
+			case 30:
 				t = GT
 				lval.token = common.Token{Token: start, Literal: ">"}
 				break
-			case 30:
+			case 32:
 				t = LT
 				lval.token = common.Token{Token: start, Literal: "<"}
 				break
@@ -153,33 +163,43 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				lval.token = common.Token{Token: start, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 				// string
-			case 42:
+			case 42: //SHIFT
 				t = STRING
 				lval.token = common.Token{Token: start, Literal: l.src[start+1 : l.pos+result[pairIndex+1]-1]}
 				break
-
-			case 6:
+			case 8:
 				t = OR
 				lval.token = common.Token{Token: start, Literal: "OR"}
 				break
-			case 8:
+			case 10:
 				t = NOT
 				lval.token = common.Token{Token: start, Literal: "NOT"}
 				break
-			case 10:
+			case 12:
 				t = AND
 				lval.token = common.Token{Token: start, Literal: "AND"}
 				break
-
-			case 34:
+			case 36:
 				t = BOOL
 				lval.token = common.Token{Token: start, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
-			case 44:
+			case 44: // gia' sfhittato
 				t = IDENT
-
 				lval.token = common.Token{Token: start, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
+			case 56:
+				t = TIME
+				lval.token = common.Token{Token: start, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+			case 48:
+				if result[52] != -1 {
+					t = DATETIME
+				} else {
+					t = DATE
+				}
+				lval.token = common.Token{Token: start, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+
 			}
 			if t != -1 {
 				l.pos += result[pairIndex+1]

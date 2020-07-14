@@ -13,7 +13,7 @@ type AImpl struct {
 
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse(" false ")
+	q, error := queryparser.Parse(" @RFJRJURJU ")
 	if error != nil {
 		fmt.Println(error)
 		return
