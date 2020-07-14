@@ -19,7 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15a1754e-7b77-4842-a199-653b86ee2f34" name="Default Changelist" comment="update" />
+    <list default="true" id="15a1754e-7b77-4842-a199-653b86ee2f34" name="Default Changelist" comment="update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/queryparser.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/queryparser.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/y.output" beforeDir="false" afterPath="$PROJECT_DIR$/parser/y.output" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/main_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/main_test.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,17 +70,8 @@
       <recent name="C:\data\develop\go\src\query-parser\tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.go test github.com/publicocean0/queryparser/tests">
-    <configuration name="go build queryparser/tests" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="query-parser" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <filePath value="$PROJECT_DIR$/tests/main.go" />
-      <package value="queryparser/tests" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go test github.com/publicocean0/queryparser/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.go test github.com/publicocean0/queryparser/tests (3)">
+    <configuration name="go test github.com/publicocean0/queryparser/tests (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="queryparser" />
       <working_directory value="$PROJECT_DIR$/tests" />
       <framework value="gotest" />
@@ -84,12 +81,32 @@
       <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go test queryparser/tests (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="go test github.com/publicocean0/queryparser/tests (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="queryparser" />
       <working_directory value="$PROJECT_DIR$/tests" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="queryparser/tests" />
+      <package value="github.com/publicocean0/queryparser/tests" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test github.com/publicocean0/queryparser/tests (3)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="queryparser" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/publicocean0/queryparser/tests" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test github.com/publicocean0/queryparser/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="queryparser" />
+      <working_directory value="$PROJECT_DIR$/tests" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/publicocean0/queryparser/tests" />
       <directory value="$PROJECT_DIR$/" />
       <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
@@ -104,28 +121,21 @@
       <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go test queryparser/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="query-parser" />
-      <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="PACKAGE" />
-      <package value="queryparser/tests" />
-      <directory value="$PROJECT_DIR$/" />
-      <filePath value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.go test github.com/publicocean0/queryparser/tests (3)" />
+        <item itemvalue="Go Test.go test github.com/publicocean0/queryparser/tests (2)" />
+        <item itemvalue="Go Test.go test github.com/publicocean0/queryparser/tests (1)" />
         <item itemvalue="Go Test.go test github.com/publicocean0/queryparser/tests" />
         <item itemvalue="Go Test.go test queryparser/tests (2)" />
-        <item itemvalue="Go Test.go test queryparser/tests (1)" />
-        <item itemvalue="Go Test.go test queryparser/tests" />
-        <item itemvalue="Go Build.go build queryparser/tests" />
       </list>
     </recent_temporary>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.y" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -144,7 +154,8 @@
     <MESSAGE value="refactor" />
     <MESSAGE value="fix pointers bug in ast" />
     <MESSAGE value="change internal" />
-    <option name="LAST_COMMIT_MESSAGE" value="change internal" />
+    <MESSAGE value="add dynamic value casting" />
+    <option name="LAST_COMMIT_MESSAGE" value="add dynamic value casting" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -170,54 +181,71 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="719" y="218" key="#xdebugger.evaluate/0.0.1920.1032@0.0.1920.1032" timestamp="1592425759852" />
-    <state width="639" height="466" key="DebuggerActiveHint" timestamp="1592426603316">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="731" height="470" key="DebuggerActiveHint" timestamp="1594732301027">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="639" height="466" key="DebuggerActiveHint/0.0.1920.1032@0.0.1920.1032" timestamp="1592426603316" />
-    <state width="1222" height="160" key="GridCell.Tab.0.bottom" timestamp="1593511446769">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="731" height="470" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1594732301027" />
+    <state width="1877" height="308" key="GridCell.Tab.0.bottom" timestamp="1594733258846">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1222" height="160" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1593511446769" />
-    <state width="1860" height="302" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
-    <state width="1222" height="160" key="GridCell.Tab.0.center" timestamp="1593511446769">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1222" height="160" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1593523775892" />
+    <state width="1877" height="277" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1594370214469" />
+    <state width="1877" height="308" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594733258846" />
+    <state width="1877" height="308" key="GridCell.Tab.0.center" timestamp="1594733258846">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1222" height="160" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1593511446769" />
-    <state width="1860" height="302" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
-    <state width="1222" height="160" key="GridCell.Tab.0.left" timestamp="1593511446769">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1222" height="160" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1593523775892" />
+    <state width="1877" height="277" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1594370214469" />
+    <state width="1877" height="308" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594733258846" />
+    <state width="1877" height="308" key="GridCell.Tab.0.left" timestamp="1594733258846">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1222" height="160" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1593511446769" />
-    <state width="1860" height="302" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
-    <state width="1222" height="160" key="GridCell.Tab.0.right" timestamp="1593511446769">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1222" height="160" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1593523775892" />
+    <state width="1877" height="277" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1594370214469" />
+    <state width="1877" height="308" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594733258846" />
+    <state width="1877" height="308" key="GridCell.Tab.0.right" timestamp="1594733258846">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1222" height="160" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1593511446769" />
-    <state width="1860" height="302" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
-    <state width="1860" height="302" key="GridCell.Tab.1.bottom" timestamp="1592559213946">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1222" height="160" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1593523775892" />
+    <state width="1877" height="277" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1594370214469" />
+    <state width="1877" height="308" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594733258846" />
+    <state width="1877" height="308" key="GridCell.Tab.1.bottom" timestamp="1594733260431">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1860" height="302" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213946" />
-    <state width="1860" height="302" key="GridCell.Tab.1.center" timestamp="1592559213945">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1877" height="308" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594733260431" />
+    <state width="1877" height="308" key="GridCell.Tab.1.center" timestamp="1594733260431">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1860" height="302" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
-    <state width="1860" height="302" key="GridCell.Tab.1.left" timestamp="1592559213945">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1877" height="308" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594733260431" />
+    <state width="1877" height="308" key="GridCell.Tab.1.left" timestamp="1594733260431">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1860" height="302" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213945" />
-    <state width="1860" height="302" key="GridCell.Tab.1.right" timestamp="1592559213946">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1877" height="308" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594733260431" />
+    <state width="1877" height="308" key="GridCell.Tab.1.right" timestamp="1594733260431">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1860" height="302" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592559213946" />
-    <state x="235" y="73" key="Vcs.Push.Dialog.v2" timestamp="1593511500163">
+    <state width="1877" height="308" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594733260431" />
+    <state x="235" y="73" key="Vcs.Push.Dialog.v2" timestamp="1593522580687">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="235" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1593511500163" />
+    <state x="235" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1593522580687" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1594728033667">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1594728033667" />
     <state x="518" y="244" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1592391956311">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="518" y="244" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1032@0.0.1920.1032" timestamp="1592391956311" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1594733167435">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594733167435" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -234,32 +262,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>617</line>
+          <line>649</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>624</line>
+          <line>656</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>596</line>
+          <line>628</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>603</line>
+          <line>635</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>602</line>
+          <line>634</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>604</line>
+          <line>636</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
@@ -268,38 +296,48 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>589</line>
+          <line>621</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>582</line>
+          <line>614</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>598</line>
+          <line>630</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>612</line>
+          <line>644</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>437</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>586</line>
+          <line>618</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
-          <line>441</line>
-          <option name="timeStamp" value="41" />
+          <line>195</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
+          <line>153</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
+          <line>168</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/parser/queryparser.go</url>
+          <line>111</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -13,7 +13,7 @@ type AImpl struct {
 
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse("( prova = \"CIAO\" ) AND A > 3    ")
+	q, error := queryparser.Parse(" false ")
 	if error != nil {
 		fmt.Println(error)
 		return
