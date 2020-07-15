@@ -9,12 +9,9 @@ import (
 
 	
 
-
-	"io"
-     "strings"
-     "unicode"
-	"text/scanner"
+     "time"
 	"strconv"
+	"regexp"
 	"github.com/publicocean0/queryparser/common"
 )
 
@@ -48,6 +45,9 @@ import (
 %token <token> OR
 %token <token> LIKE
 %token <token> NLIKE
+%token <token> DATE
+%token <token> DATETIME
+%token <token> TIME
 
 %type <expr> expr
 %type <cond> condition
@@ -183,7 +183,116 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 f, _ := strconv.ParseFloat($3.Literal,  64)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
-};
+}
+| IDENT EQ DATE
+{
+t, _ := time.Parse("1970-01-01", $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT EQ DATETIME
+{
+t, _ := time.Parse(time.RFC3339, $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT EQ TIME
+{
+t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT NEQ DATE
+{
+t, _ := time.Parse("1970-01-01", $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT  NEQ  DATETIME
+{
+t, _ := time.Parse(time.RFC3339, $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT NEQ TIME
+{
+t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT LT DATE
+{
+t, _ := time.Parse("1970-01-01", $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT  LT  DATETIME
+{
+t, _ := time.Parse(time.RFC3339, $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT LT TIME
+{
+t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT GT DATE
+{
+t, _ := time.Parse("1970-01-01", $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT  GT  DATETIME
+{
+t, _ := time.Parse(time.RFC3339, $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT GT TIME
+{
+t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT LTE DATE
+{
+t, _ := time.Parse("1970-01-01", $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT  LTE  DATETIME
+{
+t, _ := time.Parse(time.RFC3339, $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT LTE TIME
+{
+t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT GTE DATE
+{
+t, _ := time.Parse("1970-01-01", $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT  GTE  DATETIME
+{
+t, _ := time.Parse(time.RFC3339, $3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT GTE TIME
+{
+t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+;
 
 
 
@@ -191,99 +300,144 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 
 
 type QueryLexerImpl struct {
-	scanner.Scanner
-	Errors []common.Exception
-	AST common.Expression
+	src       string
+	pos       int
+	re        *regexp.Regexp
+	Exception *common.Exception
+	AST       common.Expression
 }
 
-func (l *QueryLexerImpl) Init(src io.Reader) *scanner.Scanner {
-	l.Scanner.Init(src)
-	l.Scanner.Mode = scanner.ScanIdents | scanner.ScanInts | scanner.ScanFloats | scanner.ScanChars | scanner.ScanStrings | scanner.ScanRawStrings | scanner.SkipComments
-	l.Scanner.IsIdentRune = func(ch rune, i int) bool {
-		return ch == '_' || ((ch == '<' || ch == '>' || ch == '!') && i == 0) || ((ch == '=' || ch == '~') && i < 2) || unicode.IsLetter(ch) || (unicode.IsDigit(ch) && i > 0)
-	}
-	l.Scanner.Error = func(s *scanner.Scanner, msg string) {
-        c:=common.Exception{}
-        c.Init(s.Column,msg)
-		l.Errors = append(l.Errors, c)
-	}
-	return &l.Scanner
+func (l *QueryLexerImpl) Init(src string) {
+	l.src = src
+	l.pos = 0
+	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"[^"]*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{1,2}\-\d{1,2})(T\d{1,2}\:\d{2}(\:\d{2})?)?)|(\d{1,2}\:\d{2}(\:\d{2}(\:\d{2})?)))|(?P<number>([-+]?\d+)(\.\d+)?))`)
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
-	t := int(l.Scan())
-	s := l.TokenText()
-
-	if t == scanner.EOF {
+	var t int = -1
+	// remove all spaces on the left
+	for l.src[l.pos] == ' ' || l.src[l.pos] == '\t' {
+		l.pos++
+	}
+	if l.src[l.pos] == '(' {
+		t = LPAREN
+		lval.token = common.Token{Token: t, Literal: "("}
+		l.pos++
+		return t
+	} else if l.src[l.pos] == ')' {
+		t = RPAREN
+		lval.token = common.Token{Token: t, Literal: ")"}
+		l.pos++
 		return t
 	}
-	st := rune(t)
-	if st == '(' {
-		t = LPAREN
+	//find the leftmost token (and its subtokens)
+	result := l.re.FindSubmatchIndex([]byte(l.src[l.pos:]))
+	if result == nil {
+		l.Exception = &common.Exception{}
+		l.Exception.Init(l.pos, "invalid syntax at "+l.src[l.pos:])
+		return -1
 	}
-	if st == ')' {
-		t = RPAREN
-	}
-	if t == scanner.Ident && !strings.ContainsAny(s,"><=!~") {
-		t = IDENT
-	}
-	if t == scanner.String {
-		t = STRING
-		s = s[1 : len(s)-1]
-	}
-	if t == scanner.Int {
-		t = INT
-	}
-	if t == scanner.Float {
-		t = FLOAT
-	}
-	if s == "=" {
-		t = EQ
-	}
-	if s == "!=" {
-		t = NEQ
-	}
-	if s == "~" {
-		t = LIKE
-	}
-	if s == "!~" {
-		t = NLIKE
-	}
-	if s == "<" {
-		t = LT
-	}
-	if s == "<=" {
-		t = LT
-	}
-	if s == ">" {
-		t = LT
-	}
-	if s == ">=" {
-		t = LT
-	}
-	if s == "true" {
-		t = BOOL
-	}
-	if s == "false" {
-		t = BOOL
-	}
-	if s == "AND" {
-		t = AND
-	}
-	if s == "OR" {
-		t = OR
-	}
+	for pairIndex := 2; t == -1 && pairIndex < 68; pairIndex += 2 {
 
-	lval.token = common.Token{Token: t, Literal: s}
+		rstart := result[pairIndex]
+		if rstart != -1 {
+			start := l.pos + result[pairIndex]
+			switch pairIndex {
+			// comparator
+			case 18:
+				t = NEQ
+				lval.token = common.Token{Token: t, Literal: "!="}
+				break
+			case 20:
+				t = NLIKE
+				lval.token = common.Token{Token: t, Literal: "!~"}
+				break
+			case 22:
+				t = LTE
+				lval.token = common.Token{Token: t, Literal: "<="}
+				break
+			case 24:
+				t = GTE
+				lval.token = common.Token{Token: t, Literal: ">="}
+				break
+			case 26:
+				t = EQ
+				lval.token = common.Token{Token: t, Literal: "="}
+				break
+			case 28:
+				t = LIKE
+				lval.token = common.Token{Token: t, Literal: "~"}
+				break
+			case 30:
+				t = GT
+				lval.token = common.Token{Token: t, Literal: ">"}
+				break
+			case 32:
+				t = LT
+				lval.token = common.Token{Token: t, Literal: "<"}
+				break
+			case 62:
+				if result[66] != -1 {
+					t = FLOAT
+				} else {
+					t = INT
+				}
+				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+				// string
+			case 42: //SHIFT
+				t = STRING
+				lval.token = common.Token{Token: t, Literal: l.src[start+1 : l.pos+result[pairIndex+1]-1]}
+				break
+			case 8:
+				t = OR
+				lval.token = common.Token{Token: t, Literal: "OR"}
+				break
+			case 10:
+				t = NOT
+				lval.token = common.Token{Token: t, Literal: "NOT"}
+				break
+			case 12:
+				t = AND
+				lval.token = common.Token{Token: t, Literal: "AND"}
+				break
+			case 36:
+				t = BOOL
+				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+			case 44: // gia' sfhittato
+				t = IDENT
+				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+			case 56:
+				t = TIME
+				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+			case 48:
+				if result[52] != -1 {
+					t = DATETIME
+				} else {
+					t = DATE
+				}
+				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				break
+
+			}
+			if t != -1 {
+				l.pos += result[pairIndex+1]
+			}
+
+		}
+
+	}
 
 	return t
 }
 
 func (l *QueryLexerImpl) Error(e string) {
-	l.Scanner.ErrorCount++
-	l.Scanner.Error(&(l.Scanner), e)
+ l.Exception=&common.Exception{}
+	l.Exception.Init(l.pos,e+" at "+l.src[l.pos:])
 }
-
 
 
 
