@@ -91,15 +91,21 @@ type QueryLexerImpl struct {
 func (l *QueryLexerImpl) Init(src string) {
 	l.src = src
 	l.pos = 0
-	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"[^"]*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{1,2}\-\d{1,2})(T(\d{1,2}\:\d{1,2}((\:\d{2}(\:\d{2})?)?)((\+\d{1,2})|Z)?))?)|(\d{1,2}\:\d{1,2}((\:\d{2}(\:\d{2})?)?)((\+\d{1,2})|Z)?))|(?P<number>([-+]?\d+)(\.\d+)?))`)
+	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"[^"]*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{1,2}\-\d{1,2})(T(\d{1,2}\:\d{1,2}((\:\d{2}(\:\d{2})?)?)((\+\d{1,2})|Z)?))?)|(\d{1,2}\:\d{1,2}((\:\d{2}(\:\d{2})?)?)((\+\d{1,2})|Z)?))|(?P<number>([-+]?\d+)(\.\d+)?)) *`)
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 	var t int = -1
+	len := len(l.src)
 	// remove all spaces on the left
-	for l.src[l.pos] == ' ' || l.src[l.pos] == '\t' {
+	for l.pos < len && (l.src[l.pos] == ' ' || l.src[l.pos] == '\t') {
 		l.pos++
+
 	}
+	if l.pos == len {
+		return -1
+	}
+
 	if l.src[l.pos] == '(' {
 		t = LPAREN
 		lval.token = common.Token{Token: t, Literal: "("}
