@@ -89,8 +89,8 @@ type QueryLexerImpl struct {
 	lastParsedToken *common.Token
 }
 
-func (l *QueryLexerImpl) SetLastParsedToken(token *common.Token) {
-	l.lastParsedToken = token
+func (l *QueryLexerImpl) PositionedError(pos int,msg string) {
+	
 }
 
 func (l *QueryLexerImpl) Init(src string) {
@@ -1004,9 +1004,10 @@ Querydefault:
 		{
 			t, e := time.Parse(time.RFC3339, "1970-01-01T"+QueryDollar[3].token.Literal)
 			if e != nil {
-				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
+				//var q * QueryLexerImpl=&(Querylex.(QueryLexerImpl))
+				//q.SetLastParsedToken(&QueryDollar[3].token)
 
-				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
+				//q.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
 				break
 			} else {
 				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}

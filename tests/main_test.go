@@ -6,14 +6,11 @@ import (
 	"testing"
 )
 
-type A interface{}
-type AImpl struct {
-	a string
-}
+
 
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse("   r = 2010-05-02T10:32:44Z        ")
+	q, error := queryparser.Parse("   r = 2010-05-02T10:32Z        ")
 	if error != nil {
 		fmt.Println(error)
 		return
