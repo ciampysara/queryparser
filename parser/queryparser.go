@@ -127,7 +127,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 	if result == nil {
 		return -1
 	}
-	for pairIndex := 2; t == -1 && pairIndex < 88; pairIndex += 2 {
+	for pairIndex := 2; t == -1 && pairIndex < 84; pairIndex += 2 {
 
 		rstart := result[pairIndex]
 		if rstart != -1 {
