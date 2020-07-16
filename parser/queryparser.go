@@ -166,8 +166,8 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				t = LT
 				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "<"}
 				break
-			case 62:
-				if result[66] != -1 {
+			case 78:
+				if result[82] != -1 {
 					t = FLOAT
 				} else {
 					t = INT

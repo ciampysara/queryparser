@@ -68,6 +68,24 @@ state 5
 	condition:  IDENT.LTE INT 
 	condition:  IDENT.GTE FLOAT 
 	condition:  IDENT.LTE FLOAT 
+	condition:  IDENT.EQ DATE 
+	condition:  IDENT.EQ DATETIME 
+	condition:  IDENT.EQ TIME 
+	condition:  IDENT.NEQ DATE 
+	condition:  IDENT.NEQ DATETIME 
+	condition:  IDENT.NEQ TIME 
+	condition:  IDENT.LT DATE 
+	condition:  IDENT.LT DATETIME 
+	condition:  IDENT.LT TIME 
+	condition:  IDENT.GT DATE 
+	condition:  IDENT.GT DATETIME 
+	condition:  IDENT.GT TIME 
+	condition:  IDENT.LTE DATE 
+	condition:  IDENT.LTE DATETIME 
+	condition:  IDENT.LTE TIME 
+	condition:  IDENT.GTE DATE 
+	condition:  IDENT.GTE DATETIME 
+	condition:  IDENT.GTE TIME 
 
 	EQ  shift 10
 	NEQ  shift 11
@@ -126,11 +144,17 @@ state 10
 	condition:  IDENT EQ.BOOL 
 	condition:  IDENT EQ.INT 
 	condition:  IDENT EQ.FLOAT 
+	condition:  IDENT EQ.DATE 
+	condition:  IDENT EQ.DATETIME 
+	condition:  IDENT EQ.TIME 
 
 	STRING  shift 21
 	INT  shift 23
 	FLOAT  shift 24
 	BOOL  shift 22
+	DATE  shift 25
+	DATETIME  shift 26
+	TIME  shift 27
 	.  error
 
 
@@ -139,61 +163,91 @@ state 11
 	condition:  IDENT NEQ.BOOL 
 	condition:  IDENT NEQ.INT 
 	condition:  IDENT NEQ.FLOAT 
+	condition:  IDENT NEQ.DATE 
+	condition:  IDENT NEQ.DATETIME 
+	condition:  IDENT NEQ.TIME 
 
-	STRING  shift 25
-	INT  shift 27
-	FLOAT  shift 28
-	BOOL  shift 26
+	STRING  shift 28
+	INT  shift 30
+	FLOAT  shift 31
+	BOOL  shift 29
+	DATE  shift 32
+	DATETIME  shift 33
+	TIME  shift 34
 	.  error
 
 
 state 12
 	condition:  IDENT LIKE.STRING 
 
-	STRING  shift 29
+	STRING  shift 35
 	.  error
 
 
 state 13
 	condition:  IDENT NLIKE.STRING 
 
-	STRING  shift 30
+	STRING  shift 36
 	.  error
 
 
 state 14
 	condition:  IDENT GT.INT 
 	condition:  IDENT GT.FLOAT 
+	condition:  IDENT GT.DATE 
+	condition:  IDENT GT.DATETIME 
+	condition:  IDENT GT.TIME 
 
-	INT  shift 31
-	FLOAT  shift 32
+	INT  shift 37
+	FLOAT  shift 38
+	DATE  shift 39
+	DATETIME  shift 40
+	TIME  shift 41
 	.  error
 
 
 state 15
 	condition:  IDENT LT.INT 
 	condition:  IDENT LT.FLOAT 
+	condition:  IDENT LT.DATE 
+	condition:  IDENT LT.DATETIME 
+	condition:  IDENT LT.TIME 
 
-	INT  shift 33
-	FLOAT  shift 34
+	INT  shift 42
+	FLOAT  shift 43
+	DATE  shift 44
+	DATETIME  shift 45
+	TIME  shift 46
 	.  error
 
 
 state 16
 	condition:  IDENT GTE.INT 
 	condition:  IDENT GTE.FLOAT 
+	condition:  IDENT GTE.DATE 
+	condition:  IDENT GTE.DATETIME 
+	condition:  IDENT GTE.TIME 
 
-	INT  shift 35
-	FLOAT  shift 36
+	INT  shift 47
+	FLOAT  shift 48
+	DATE  shift 49
+	DATETIME  shift 50
+	TIME  shift 51
 	.  error
 
 
 state 17
 	condition:  IDENT LTE.INT 
 	condition:  IDENT LTE.FLOAT 
+	condition:  IDENT LTE.DATE 
+	condition:  IDENT LTE.DATETIME 
+	condition:  IDENT LTE.TIME 
 
-	INT  shift 37
-	FLOAT  shift 38
+	INT  shift 52
+	FLOAT  shift 53
+	DATE  shift 54
+	DATETIME  shift 55
+	TIME  shift 56
 	.  error
 
 
@@ -245,98 +299,206 @@ state 24
 
 
 state 25
+	condition:  IDENT EQ DATE.    (24)
+
+	.  reduce 24 (src line 187)
+
+
+state 26
+	condition:  IDENT EQ DATETIME.    (25)
+
+	.  reduce 25 (src line 193)
+
+
+state 27
+	condition:  IDENT EQ TIME.    (26)
+
+	.  reduce 26 (src line 199)
+
+
+state 28
 	condition:  IDENT NEQ STRING.    (7)
 
 	.  reduce 7 (src line 93)
 
 
-state 26
+state 29
 	condition:  IDENT NEQ BOOL.    (11)
 
 	.  reduce 11 (src line 110)
 
 
-state 27
+state 30
 	condition:  IDENT NEQ INT.    (13)
 
 	.  reduce 13 (src line 121)
 
 
-state 28
+state 31
 	condition:  IDENT NEQ FLOAT.    (15)
 
 	.  reduce 15 (src line 133)
 
 
-state 29
+state 32
+	condition:  IDENT NEQ DATE.    (27)
+
+	.  reduce 27 (src line 205)
+
+
+state 33
+	condition:  IDENT NEQ DATETIME.    (28)
+
+	.  reduce 28 (src line 211)
+
+
+state 34
+	condition:  IDENT NEQ TIME.    (29)
+
+	.  reduce 29 (src line 217)
+
+
+state 35
 	condition:  IDENT LIKE STRING.    (8)
 
 	.  reduce 8 (src line 97)
 
 
-state 30
+state 36
 	condition:  IDENT NLIKE STRING.    (9)
 
 	.  reduce 9 (src line 101)
 
 
-state 31
+state 37
 	condition:  IDENT GT INT.    (16)
 
 	.  reduce 16 (src line 139)
 
 
-state 32
+state 38
 	condition:  IDENT GT FLOAT.    (18)
 
 	.  reduce 18 (src line 151)
 
 
-state 33
+state 39
+	condition:  IDENT GT DATE.    (33)
+
+	.  reduce 33 (src line 241)
+
+
+state 40
+	condition:  IDENT GT DATETIME.    (34)
+
+	.  reduce 34 (src line 247)
+
+
+state 41
+	condition:  IDENT GT TIME.    (35)
+
+	.  reduce 35 (src line 253)
+
+
+state 42
 	condition:  IDENT LT INT.    (17)
 
 	.  reduce 17 (src line 145)
 
 
-state 34
+state 43
 	condition:  IDENT LT FLOAT.    (19)
 
 	.  reduce 19 (src line 157)
 
 
-state 35
+state 44
+	condition:  IDENT LT DATE.    (30)
+
+	.  reduce 30 (src line 223)
+
+
+state 45
+	condition:  IDENT LT DATETIME.    (31)
+
+	.  reduce 31 (src line 229)
+
+
+state 46
+	condition:  IDENT LT TIME.    (32)
+
+	.  reduce 32 (src line 235)
+
+
+state 47
 	condition:  IDENT GTE INT.    (20)
 
 	.  reduce 20 (src line 163)
 
 
-state 36
+state 48
 	condition:  IDENT GTE FLOAT.    (22)
 
 	.  reduce 22 (src line 175)
 
 
-state 37
+state 49
+	condition:  IDENT GTE DATE.    (39)
+
+	.  reduce 39 (src line 277)
+
+
+state 50
+	condition:  IDENT GTE DATETIME.    (40)
+
+	.  reduce 40 (src line 283)
+
+
+state 51
+	condition:  IDENT GTE TIME.    (41)
+
+	.  reduce 41 (src line 289)
+
+
+state 52
 	condition:  IDENT LTE INT.    (21)
 
 	.  reduce 21 (src line 169)
 
 
-state 38
+state 53
 	condition:  IDENT LTE FLOAT.    (23)
 
 	.  reduce 23 (src line 181)
 
 
-21 terminals, 3 nonterminals
-24 grammar rules, 39/8000 states
+state 54
+	condition:  IDENT LTE DATE.    (36)
+
+	.  reduce 36 (src line 259)
+
+
+state 55
+	condition:  IDENT LTE DATETIME.    (37)
+
+	.  reduce 37 (src line 265)
+
+
+state 56
+	condition:  IDENT LTE TIME.    (38)
+
+	.  reduce 38 (src line 271)
+
+
+24 terminals, 3 nonterminals
+42 grammar rules, 57/8000 states
 0 shift/reduce, 0 reduce/reduce conflicts reported
 52 working sets used
 memory: parser 9/120000
 8 extra closures
-47 shift entries, 1 exceptions
+65 shift entries, 1 exceptions
 6 goto entries
 4 entries saved by goto default
-Optimizer space used: output 42/120000
-42 table entries, 1 zero
-maximum spread: 21, maximum offset: 19
+Optimizer space used: output 65/120000
+65 table entries, 6 zero
+maximum spread: 24, maximum offset: 19

@@ -13,7 +13,7 @@ type AImpl struct {
 
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse("  ee < 55 ")
+	q, error := queryparser.Parse(" r < 2010-05-02  ")
 	if error != nil {
 		fmt.Println(error)
 		return
