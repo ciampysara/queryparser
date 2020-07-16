@@ -81,11 +81,16 @@ const QueryInitialStackSize = 16
 /*  start  of  programs  */
 
 type QueryLexerImpl struct {
-	src       string
-	pos       int
-	re        *regexp.Regexp
-	Exception *common.Exception
-	AST       common.Expression
+	src             string
+	pos             int
+	re              *regexp.Regexp
+	Exception       *common.Exception
+	AST             common.Expression
+	lastParsedToken *common.Token
+}
+
+func (l *QueryLexerImpl) SetLastParsedToken(token *common.Token) {
+	l.lastParsedToken = token
 }
 
 func (l *QueryLexerImpl) Init(src string) {
@@ -108,20 +113,18 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 	if l.src[l.pos] == '(' {
 		t = LPAREN
-		lval.token = common.Token{Token: t, Literal: "("}
+		lval.token = common.Token{Position: l.pos, Token: t, Literal: "("}
 		l.pos++
 		return t
 	} else if l.src[l.pos] == ')' {
 		t = RPAREN
-		lval.token = common.Token{Token: t, Literal: ")"}
+		lval.token = common.Token{Position: l.pos, Token: t, Literal: ")"}
 		l.pos++
 		return t
 	}
 	//find the leftmost token (and its subtokens)
 	result := l.re.FindSubmatchIndex([]byte(l.src[l.pos:]))
 	if result == nil {
-		l.Exception = &common.Exception{}
-		l.Exception.Init(l.pos, "invalid syntax at "+l.src[l.pos:])
 		return -1
 	}
 	for pairIndex := 2; t == -1 && pairIndex < 88; pairIndex += 2 {
@@ -133,35 +136,35 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 			// comparator
 			case 18:
 				t = NEQ
-				lval.token = common.Token{Token: t, Literal: "!="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "!="}
 				break
 			case 20:
 				t = NLIKE
-				lval.token = common.Token{Token: t, Literal: "!~"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "!~"}
 				break
 			case 22:
 				t = LTE
-				lval.token = common.Token{Token: t, Literal: "<="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "<="}
 				break
 			case 24:
 				t = GTE
-				lval.token = common.Token{Token: t, Literal: ">="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: ">="}
 				break
 			case 26:
 				t = EQ
-				lval.token = common.Token{Token: t, Literal: "="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "="}
 				break
 			case 28:
 				t = LIKE
-				lval.token = common.Token{Token: t, Literal: "~"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "~"}
 				break
 			case 30:
 				t = GT
-				lval.token = common.Token{Token: t, Literal: ">"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: ">"}
 				break
 			case 32:
 				t = LT
-				lval.token = common.Token{Token: t, Literal: "<"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "<"}
 				break
 			case 62:
 				if result[66] != -1 {
@@ -169,32 +172,32 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				} else {
 					t = INT
 				}
-				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 				// string
 			case 42: //SHIFT
 				t = STRING
-				lval.token = common.Token{Token: t, Literal: l.src[start+1 : l.pos+result[pairIndex+1]-1]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start+1 : l.pos+result[pairIndex+1]-1]}
 				break
 			case 8:
 				t = OR
-				lval.token = common.Token{Token: t, Literal: "OR"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "OR"}
 				break
 			case 10:
 				t = NOT
-				lval.token = common.Token{Token: t, Literal: "NOT"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "NOT"}
 				break
 			case 12:
 				t = AND
-				lval.token = common.Token{Token: t, Literal: "AND"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "AND"}
 				break
 			case 36:
 				t = BOOL
-				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 			case 44: // gia' sfhittato
 				t = IDENT
-				lval.token = common.Token{Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 			case 66:
 				t = TIME
@@ -203,13 +206,13 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 					s += ":00"
 					if result[74] != -1 {
 						s += l.src[l.pos+result[74] : l.pos+result[75]]
-						lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[74]] + s}
+						lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[74]] + s}
 					}
 				}
 				if result[74] == -1 {
 					s += "+00:00"
 				}
-				lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 				break
 			case 48:
 				s := ""
@@ -220,18 +223,18 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 						s = ":00"
 						if result[62] != -1 {
 							s += l.src[l.pos+result[62] : l.pos+result[63]]
-							lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[62]] + s}
+							lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[62]] + s}
 						}
 					}
 					if result[62] == -1 {
 						s += "+00:00"
-						lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+						lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 					}
 
 				} else {
 					t = DATE
 					s += "T00:00:00+00:00"
-					lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 				}
 
 				break
@@ -242,7 +245,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				if l.pos != len && l.src[l.pos] != ' ' {
 					t = -1
 					l.pos -= result[pairIndex+1]
-					//l.Error("invalid token at "+l.src[l.pos:])
+					l.lastParsedToken = nil
 					return t
 				}
 			}
@@ -256,7 +259,14 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
-	l.Exception.Init(l.pos, e+" at "+l.src[l.pos:])
+
+	if l.lastParsedToken == nil {
+		s := l.src[l.pos:]
+		l.Exception.Init(l.pos, e+" at "+s)
+	} else {
+		s := l.src[l.lastParsedToken.Position:]
+		l.Exception.Init(l.pos, e+" at "+s)
+	}
 }
 
 // yacctab:1
@@ -854,9 +864,12 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 		// queryparser.y:188
 		{
-			t, _ := time.Parse(time.RFC3339, QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
-
+			t, e := time.Parse(time.RFC3339, QueryDollar[3].token.Literal)
+			if e != nil {
+				Errflag = 1
+			} else {
+				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			}
 		}
 	case 25:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
@@ -870,9 +883,14 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 		// queryparser.y:200
 		{
-			t, _ := time.Parse(time.RFC3339, "1970-01-01T"+QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
-
+			t, e := time.Parse(time.RFC3339, "1970-01-01T"+QueryDollar[3].token.Literal)
+			if e != nil {
+				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
+				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
+				break
+			} else {
+				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			}
 		}
 	case 27:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]

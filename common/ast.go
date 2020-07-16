@@ -3,8 +3,9 @@ package common
 import "fmt"
 
 type Token struct {
-	Token   int
-	Literal string
+	Position int
+	Token    int
+	Literal  string
 }
 type TokenValue struct {
 	Token   int

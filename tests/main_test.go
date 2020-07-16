@@ -13,7 +13,7 @@ type AImpl struct {
 
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse(" vae = 23:10:30Z ")
+	q, error := queryparser.Parse(" vae = 23:10:80 ")
 	if error != nil {
 		fmt.Println(error)
 		return
