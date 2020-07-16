@@ -298,8 +298,6 @@ break;
     $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 }
 }
-
-}
 ;
 
 
@@ -429,34 +427,37 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 			case 66:
 				t = TIME
 				s := ""
+				var index=pairIndex+1
 				if result[70] == -1 {
 					s += ":00"
 					if result[74] != -1 {
 						s += l.src[l.pos+result[74] : l.pos+result[75]]
-						lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[74]] + s}
+						index=74
 					}
 				}
 				if result[74] == -1 {
 					s += "+00:00"
 				}
-				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
 				break
 			case 48:
 				s := ""
 				if result[52] != -1 {
 					t = DATETIME
-
+                    var index=pairIndex+1
 					if result[58] == -1 {
 						s = ":00"
 						if result[62] != -1 {
 							s += l.src[l.pos+result[62] : l.pos+result[63]]
-							lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[62]] + s}
+							index=62
 						}
-					}
+					} 
 					if result[62] == -1 {
 						s += "+00:00"
-						lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 					}
+					
+					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
+					
 
 				} else {
 					t = DATE
