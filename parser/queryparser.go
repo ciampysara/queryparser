@@ -91,7 +91,7 @@ type QueryLexerImpl struct {
 func (l *QueryLexerImpl) Init(src string) {
 	l.src = src
 	l.pos = 0
-	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"[^"]*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{1,2}\-\d{1,2})(T(\d{1,2}\:\d{1,2}((\:\d{2}(\:\d{2})?)?)((\+\d{1,2})|Z)?))?)|(\d{1,2}\:\d{1,2}((\:\d{2}(\:\d{2})?)?)((\+\d{1,2})|Z)?))|(?P<number>([-+]?\d+)(\.\d+)?)) *`)
+	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"(?:[^"\\]|\\.)*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{2}\-\d{2})(T(\d{1,2}\:\d{2}((\:\d{2}(\:\d{2})?)?)(([-+]\d{2}\:\d{2})|Z)?))?)|(\d{1,2}\:\d{2}((\:\d{2}(\:\d{2})?)?)(([-+]\d{2}\:\d{2})|Z)?))|(?P<number>([-+]?\d+)(\.\d+)?))`)
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
@@ -201,33 +201,50 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				s := ""
 				if result[70] == -1 {
 					s += ":00"
+					if result[74] != -1 {
+						s += l.src[l.pos+result[74] : l.pos+result[75]]
+						lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[74]] + s}
+					}
 				}
 				if result[74] == -1 {
-					s += "+00"
+					s += "+00:00"
 				}
 				lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 				break
-			case 46:
+			case 48:
 				s := ""
 				if result[52] != -1 {
 					t = DATETIME
 
 					if result[58] == -1 {
-						s += ":00"
+						s = ":00"
+						if result[62] != -1 {
+							s += l.src[l.pos+result[62] : l.pos+result[63]]
+							lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[62]] + s}
+						}
 					}
 					if result[62] == -1 {
-						s += "+00"
+						s += "+00:00"
+						lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 					}
 
 				} else {
 					t = DATE
+					s += "T00:00:00+00:00"
+					lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 				}
-				lval.token = common.Token{Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+
 				break
 
 			}
 			if t != -1 {
 				l.pos += result[pairIndex+1]
+				if l.pos != len && l.src[l.pos] != ' ' {
+					t = -1
+					l.pos -= result[pairIndex+1]
+					//l.Error("invalid token at "+l.src[l.pos:])
+					return t
+				}
 			}
 
 		}
@@ -837,7 +854,7 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 		// queryparser.y:188
 		{
-			t, _ := time.Parse("1970-01-01", QueryDollar[3].token.Literal)
+			t, _ := time.Parse(time.RFC3339, QueryDollar[3].token.Literal)
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
