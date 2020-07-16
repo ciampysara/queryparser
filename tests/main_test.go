@@ -10,7 +10,7 @@ import (
 
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse("   r = 2010-05-02T10:32Z        ")
+	q, error := queryparser.Parse("  aa  =     3    ")
 	if error != nil {
 		fmt.Println(error)
 		return
