@@ -12,7 +12,7 @@ func TestMain(m *testing.M) {
 	q, exception := queryparser.Parse(src)
 	if exception != nil {
 		fmt.Println(exception.Error() + ":\r" + src + "\r" + exception.Cursor())
-		return
+
 	} else {
 		fmt.Println(*q)
 	}
