@@ -23,5 +23,5 @@ func (l *Exception) Cursor() string {
 	for i := 0; i < l.pos-1; i++ {
 		m += "─"
 	}
-	return m + "⤴"
+	return m + "^"
 }
