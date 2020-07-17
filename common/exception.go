@@ -17,3 +17,11 @@ func (l *Exception) Error() string {
 func (l *Exception) Position() int {
 	return l.pos
 }
+
+func (l *Exception) Cursor() string {
+	m := ""
+	for i := 0; i < l.pos-1; i++ {
+		m += "─"
+	}
+	return m + "⤴"
+}

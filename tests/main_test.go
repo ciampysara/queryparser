@@ -6,13 +6,11 @@ import (
 	"testing"
 )
 
-
-
 func TestMain(m *testing.M) {
 
-	q, error := queryparser.Parse("  aa  =     3    ")
-	if error != nil {
-		fmt.Println(error)
+	q, exception := queryparser.Parse("  aa       3    ")
+	if exception != nil {
+		fmt.Println(exception.Error() + "\r" + exception.Cursor())
 		return
 	}
 	fmt.Println(*q)
