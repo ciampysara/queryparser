@@ -219,8 +219,9 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
 				break
 			case 48:
-				s := ""
+
 				if result[52] != -1 {
+					s := ""
 					t = DATETIME
 					var index = pairIndex + 1
 					if result[58] == -1 {
@@ -241,8 +242,8 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 				} else {
 					t = DATE
-					s += "T00:00:00+00:00"
-					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+
+					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				}
 
 				break
@@ -872,7 +873,7 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:188
 		{
-			t, _ := time.Parse(time.RFC3339, QueryDollar[3].token.Literal)
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
@@ -1010,10 +1011,9 @@ Querydefault:
 		{
 			t, e := time.Parse(time.RFC3339, "1970-01-01T"+QueryDollar[3].token.Literal)
 			if e != nil {
-				//var q * QueryLexerImpl=&(Querylex.(QueryLexerImpl))
-				//q.SetLastParsedToken(&QueryDollar[3].token)
+				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
 
-				//q.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
+				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
 				break
 			} else {
 				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}

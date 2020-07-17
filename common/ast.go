@@ -64,7 +64,7 @@ func daysInMonth(m uint8, y uint16) uint8 { // m is 0 indexed: 0-11
 	}
 }
 
-func (l Date) Parse(s string) error {
+func (l *Date) Parse(s string) error {
 	t := strings.Split(s, "-")
 	y, _ := strconv.ParseUint(t[0], 10, 16)
 	m, _ := strconv.ParseUint(t[1], 10, 8)
@@ -73,7 +73,7 @@ func (l Date) Parse(s string) error {
 
 }
 
-func (l Date) Set(year uint16, month, day uint8) error {
+func (l *Date) Set(year uint16, month, day uint8) error {
 	if month > 11 {
 		return errors.New("invalid month")
 	}
@@ -85,35 +85,35 @@ func (l Date) Set(year uint16, month, day uint8) error {
 	l.day = day
 	return nil
 }
-func (l Date) Day() uint8 {
+func (l *Date) Day() uint8 {
 	return l.day
 }
-func (l Date) Year() uint16 {
+func (l *Date) Year() uint16 {
 	return l.year
 }
-func (l Date) Month() uint8 {
+func (l *Date) Month() uint8 {
 	return l.month
 }
-func (l Date) String() string {
+func (l *Date) String() string {
 	str := fmt.Sprintf("%d-%d-%d", l.year, l.month, l.day)
 	return str
 }
-func (l DateTime) Date() Date {
+func (l *DateTime) Date() Date {
 	return l.Date()
 }
-func (l DateTime) Time() Time {
+func (l *DateTime) Time() Time {
 	return l.Time()
 }
 func (l DateTime) String() string {
 
-	return l.Date().String() + " " + l.Time().String()
+	return l.date.String() + " " + l.time.String()
 }
 
-func (l DateTime) Set(date Date, time Time) {
+func (l *DateTime) Set(date Date, time Time) {
 	l.date = date
 	l.time = time
 }
-func (l Time) Set(hour, min, sec, zhour, zmin uint8) error {
+func (l *Time) Set(hour, min, sec, zhour, zmin uint8) error {
 	if hour >= 24 {
 		return errors.New("invalid hour")
 	}
@@ -128,8 +128,23 @@ func (l Time) Set(hour, min, sec, zhour, zmin uint8) error {
 	}
 	return nil
 }
-
-func (l Time) Parse(str string) error {
+func ParseTime(str string) (*Time, error) {
+	t := Time{}
+	e := t.Parse(str)
+	if e != nil {
+		return nil, e
+	}
+	return &t, nil
+}
+func ParseDate(str string) (*Date, error) {
+	t := Date{}
+	e := t.Parse(str)
+	if e != nil {
+		return nil, e
+	}
+	return &t, nil
+}
+func (l *Time) Parse(str string) error {
 	i := strings.IndexAny(str, "+")
 	if i == -1 {
 		i = strings.IndexAny(str, "-")
@@ -144,22 +159,22 @@ func (l Time) Parse(str string) error {
 	return l.Set(uint8(h), uint8(m), uint8(s), uint8(zh), uint8(zm))
 
 }
-func (l Time) Hour() uint8 {
+func (l *Time) Hour() uint8 {
 	return l.hour
 }
-func (l Time) Minutes() uint8 {
+func (l *Time) Minutes() uint8 {
 	return l.minutes
 }
-func (l Time) Seconds() uint8 {
+func (l *Time) Seconds() uint8 {
 	return l.seconds
 }
-func (l Time) ZoneMinutes() uint8 {
+func (l *Time) ZoneMinutes() uint8 {
 	return l.zoneMinutes
 }
-func (l Time) ZoneHour() int8 {
+func (l *Time) ZoneHour() int8 {
 	return l.zoneHour
 }
-func (l Time) String() string {
+func (l *Time) String() string {
 	str := fmt.Sprintf("%d:%d:%d", l.hour, l.minutes, l.seconds)
 	if l.zoneHour >= 0 {
 		str += "+"
