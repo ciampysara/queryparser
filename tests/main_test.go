@@ -8,7 +8,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	src := "  aa       3    "
+	src := "  aa  =     2020-10-10    "
 	q, exception := queryparser.Parse(src)
 	if exception != nil {
 		fmt.Println(exception.Error() + ":\r\n" + src + "\r\n" + exception.Cursor())

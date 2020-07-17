@@ -186,7 +186,7 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 }
 | IDENT EQ DATE
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.Date.Parse($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
@@ -436,6 +436,9 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				}
 				if result[74] == -1 {
 					s += "+00:00"
+				} else if (l.src[result[74]]=='Z'){
+					index--
+					s += "+00:00"
 				}
 				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
 				break
@@ -452,6 +455,9 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 						}
 					}
 					if result[62] == -1 {
+						s += "+00:00"
+					}else if (l.src[result[62]]=='Z'){
+						index--
 						s += "+00:00"
 					}
 
@@ -482,7 +488,6 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 	return t
 }
-
 
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
