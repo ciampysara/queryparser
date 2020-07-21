@@ -252,7 +252,9 @@ func (l *Time) ZoneHour() int8 {
 func (l *Time) ZoneOffset() int {
 	return (int(l.zoneHour)*60 + int(l.zoneMinutes)) * 60
 }
-
+func (l *Time) Offset() int {
+	return ((int(l.zoneHour)+int(l.hour))*60+int(l.zoneMinutes)+int(l.minutes))*60 + int(l.seconds)
+}
 func (l *Duration) Hour() int8 {
 	return l.hour
 }
@@ -261,6 +263,9 @@ func (l *Duration) Minutes() uint8 {
 }
 func (l *Duration) Seconds() uint8 {
 	return l.seconds
+}
+func (l *Duration) Offset() int {
+	return ((int(l.hour))*60+int(l.minutes))*60 + int(l.seconds)
 }
 func (l *Time) String() string {
 	str := fmt.Sprintf("%02d:%02d:%02d", l.hour, l.minutes, l.seconds)
