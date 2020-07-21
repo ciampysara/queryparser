@@ -94,7 +94,31 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 | IDENT NEQ STRING 
 {
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:$3.Literal}}
-} 
+}
+| IDENT LT STRING
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT GT STRING
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT LTE STRING
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT GTE STRING
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
 | IDENT LIKE STRING 
 {
 $$ =common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:$3.Literal}}
@@ -105,155 +129,397 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 } 
 | IDENT EQ BOOL 
 {
-b, _ := strconv.ParseBool($3.Literal)
+b, e := strconv.ParseBool($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:b}}
 } 
 | IDENT NEQ BOOL
 {
-b, _ := strconv.ParseBool($3.Literal)
+b, e := strconv.ParseBool($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:b}}
 }
+| IDENT LT BOOL
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT GT BOOL
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT LTE BOOL
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT GTE BOOL
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT LIKE BOOL
+ {
+ 	ql ,_:=Querylex.(*QueryLexerImpl)
+ 				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+ 				break
+ }
+ | IDENT NLIKE BOOL
+ {
+ 	ql ,_:=Querylex.(*QueryLexerImpl)
+ 				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+ 				break
+ }
 | IDENT EQ INT
 {
-i, _ := strconv.ParseInt($3.Literal, 10, 64)
+i, e := strconv.ParseInt($3.Literal, 10, 64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
 
+}
+| IDENT LIKE INT
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT NLIKE INT
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
 }
 | IDENT NEQ INT
 {
-i, _ := strconv.ParseInt($3.Literal, 10, 64)
+i, e := strconv.ParseInt($3.Literal, 10, 64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
 
 }
+| IDENT LIKE FLOAT
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
+| IDENT NLIKE FLOAT
+{
+	ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+				break
+}
 | IDENT EQ FLOAT
 {
-f, _ := strconv.ParseFloat($3.Literal,  64)
+f, e := strconv.ParseFloat($3.Literal,  64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
 }
 | IDENT NEQ FLOAT
 {
-f, _ := strconv.ParseFloat($3.Literal,  64)
+f, e := strconv.ParseFloat($3.Literal,  64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
 }
 | IDENT GT INT
 {
-i, _ := strconv.ParseInt($3.Literal, 10, 64)
+i, e := strconv.ParseInt($3.Literal, 10, 64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
 
 }
 | IDENT LT INT
 {
-i, _ := strconv.ParseInt($3.Literal, 10, 64)
+i, e := strconv.ParseInt($3.Literal, 10, 64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
 
 }
 | IDENT GT FLOAT
 {
-f, _ := strconv.ParseFloat($3.Literal,  64)
+f, e := strconv.ParseFloat($3.Literal,  64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
 }
 | IDENT LT FLOAT
 {
-f, _ := strconv.ParseFloat($3.Literal,  64)
+f, e := strconv.ParseFloat($3.Literal,  64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
 }
 | IDENT GTE INT
 {
-i, _ := strconv.ParseInt($3.Literal, 10, 64)
+i, e := strconv.ParseInt($3.Literal, 10, 64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
 
 }
 | IDENT LTE INT
 {
-i, _ := strconv.ParseInt($3.Literal, 10, 64)
+i, e := strconv.ParseInt($3.Literal, 10, 64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:i}}
 
 }
 | IDENT GTE FLOAT
 {
-f, _ := strconv.ParseFloat($3.Literal,  64)
+f, e := strconv.ParseFloat($3.Literal,  64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
 }
 | IDENT LTE FLOAT
 {
-f, _ := strconv.ParseFloat($3.Literal,  64)
+f, e := strconv.ParseFloat($3.Literal,  64)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:f}}
 
 }
 | IDENT EQ DATE
 {
-t, _ := common.ParseDate($3.Literal)
+t, e := common.ParseDate($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT EQ DATETIME
 {
-t, _ := common.ParseDateTime($3.Literal)
+t, e := common.ParseDateTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT EQ TIME
 {
-t, _ := common.ParseTime($3.Literal)
+t, e := common.ParseTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT EQ DURATION
 {
-t, _ := common.ParseDuration($3.Literal)
+t, e := common.ParseDuration($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT NEQ DATE
 {
-t, _ := common.ParseDate($3.Literal)
+t, e := common.ParseDate($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  NEQ  DATETIME
 {
-t, _ := common.ParseDateTime($3.Literal)
+t, e := common.ParseDateTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT NEQ TIME
 {
-t, _ := common.ParseTime($3.Literal)
+t, e := common.ParseTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT NEQ DURATION
 {
-t, _ := common.ParseDuration($3.Literal)
+t, e := common.ParseDuration($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LT DATE
 {
-t, _ := common.ParseDate($3.Literal)
+t, e := common.ParseDate($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  LT  DATETIME
 {
-t, _ := common.ParseDateTime($3.Literal)
+t, e := common.ParseDateTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LT TIME
 {
-t, _ := common.ParseTime($3.Literal)
+t, e := common.ParseTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LT DURATION
 {
-t, _ := common.ParseDuration($3.Literal)
+t, e := common.ParseDuration($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
@@ -265,55 +531,118 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 }
 | IDENT  GT  DATETIME
 {
-t, _ := common.ParseDateTime($3.Literal)
+t, e := common.ParseDateTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GT TIME
 {
-t, _ := common.ParseTime($3.Literal)
+t, e := common.ParseTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GT DURATION
 {
-t, _ := common.ParseDuration($3.Literal)
+t, e := common.ParseDuration($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LTE DATE
 {
-t, _ := common.ParseDate($3.Literal)
+t, e := common.ParseDate($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  LTE  DATETIME
 {
-t, _ := common.ParseDateTime($3.Literal)
+t, e := common.ParseDateTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LTE TIME
 {
-t, _ := common.ParseTime($3.Literal)
+t, e := common.ParseTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LTE DURATION
 {
-t, _ := common.ParseDuration($3.Literal)
+t, e := common.ParseDuration($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GTE DATE
 {
-t, _ := common.ParseDate($3.Literal)
+t, e := common.ParseDate($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  GTE  DATETIME
 {
-t, _ := common.ParseDateTime($3.Literal)
+t, e := common.ParseDateTime($3.Literal)
+if e != nil {
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
+}
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
@@ -321,26 +650,76 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 {
 t, e := common.ParseTime($3.Literal)
 if e != nil {
-	//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
-			
-Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
-break;
-} else {
-    $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+				ql ,_:=Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
+
+
+				break
 }
+ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
 }
 | IDENT GTE DURATION
  {
  t, e := common.ParseDuration($3.Literal)
  if e != nil {
- 	//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
+ 				ql ,_:=Querylex.(*QueryLexerImpl)
+ 				ql.PositionedError(QueryDollar[3].token.Position,e.Error())
 
- Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
- break;
- } else {
-     $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+ 				break
  }
- }
+ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+ }| IDENT LIKE DATE
+  {
+  	ql ,_:=Querylex.(*QueryLexerImpl)
+  				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+  				break
+  }
+  | IDENT LIKE DATETIME
+    {
+    	ql ,_:=Querylex.(*QueryLexerImpl)
+    				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+    				break
+    }
+    | IDENT LIKE TIME
+      {
+      	ql ,_:=Querylex.(*QueryLexerImpl)
+      				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+      				break
+      }
+      | IDENT NLIKE DATE
+        {
+        	ql ,_:=Querylex.(*QueryLexerImpl)
+        				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+        				break
+        }
+        | IDENT NLIKE DATETIME
+          {
+          	ql ,_:=Querylex.(*QueryLexerImpl)
+          				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+          				break
+          }
+          | IDENT NLIKE TIME
+            {
+            	ql ,_:=Querylex.(*QueryLexerImpl)
+            				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+            				break
+            }
+                 | IDENT LIKE DURATION
+                   {
+                   	ql ,_:=Querylex.(*QueryLexerImpl)
+                   				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+                   				break
+                   }
+
+                        | IDENT NLIKE DURATION
+                          {
+                          	ql ,_:=Querylex.(*QueryLexerImpl)
+                          				ql.PositionedError(QueryDollar[2].token.Position,"invalid operator")
+                          				break
+                          }
 ;
 
 

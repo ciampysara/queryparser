@@ -78,7 +78,7 @@ const QueryEofCode = 1
 const QueryErrCode = 2
 const QueryInitialStackSize = 16
 
-//line queryparser.y:348
+//line queryparser.y:727
 /*  start  of  programs  */
 
 type QueryLexerImpl struct {
@@ -297,32 +297,36 @@ var QueryExca = [...]int{
 
 const QueryPrivate = 57344
 
-const QueryLast = 80
+const QueryLast = 91
 
 var QueryAct = [...]int{
 
-	29, 31, 32, 30, 21, 23, 24, 22, 7, 57,
-	58, 38, 2, 51, 52, 37, 0, 33, 34, 35,
-	36, 25, 26, 27, 28, 59, 60, 61, 62, 53,
-	54, 55, 56, 45, 46, 0, 0, 39, 40, 20,
-	6, 6, 7, 7, 0, 0, 0, 0, 0, 47,
-	48, 49, 50, 41, 42, 43, 44, 10, 11, 15,
-	14, 17, 16, 5, 0, 0, 0, 0, 12, 13,
-	0, 1, 0, 0, 3, 8, 9, 4, 18, 19,
+	77, 79, 80, 78, 69, 71, 72, 70, 61, 63,
+	64, 62, 53, 55, 56, 54, 7, 81, 82, 83,
+	84, 73, 74, 75, 76, 65, 66, 67, 68, 57,
+	58, 59, 60, 45, 47, 48, 46, 37, 39, 40,
+	38, 29, 31, 32, 30, 21, 23, 24, 22, 2,
+	49, 50, 51, 52, 41, 42, 43, 44, 33, 34,
+	35, 36, 25, 26, 27, 28, 10, 11, 12, 13,
+	14, 15, 20, 6, 5, 7, 0, 16, 17, 6,
+	0, 7, 1, 0, 0, 3, 8, 9, 4, 18,
+	19,
 }
 var QueryPact = [...]int{
 
-	59, 24, -1000, 59, 59, 48, 59, 59, 23, -1000,
-	-1, -5, 10, 6, 31, 27, 7, 3, -11, -1000,
+	70, 62, -1000, 70, 70, 57, 70, 70, 56, -1000,
+	40, 36, 32, 28, 7, 3, -1, -5, -3, -1000,
 	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
 	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
 	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
 	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
-	-1000, -1000, -1000,
+	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+	-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000,
+	-1000, -1000, -1000, -1000, -1000,
 }
 var QueryPgo = [...]int{
 
-	0, 71, 12,
+	0, 82, 49,
 }
 var QueryR1 = [...]int{
 
@@ -330,7 +334,9 @@ var QueryR1 = [...]int{
 	2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 	2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 	2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
-	2, 2, 2, 2, 2, 2, 2, 2,
+	2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+	2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+	2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
 }
 var QueryR2 = [...]int{
 
@@ -338,27 +344,33 @@ var QueryR2 = [...]int{
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-	3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 }
 var QueryChk = [...]int{
 
 	-1000, -1, -2, 15, 18, 4, 17, 19, -1, -1,
-	9, 10, 20, 21, 12, 11, 14, 13, -1, -1,
+	9, 10, 11, 12, 13, 14, 20, 21, -1, -1,
 	16, 5, 8, 6, 7, 22, 23, 24, 25, 5,
-	8, 6, 7, 22, 23, 24, 25, 5, 5, 6,
-	7, 22, 23, 24, 25, 6, 7, 22, 23, 24,
-	25, 6, 7, 22, 23, 24, 25, 6, 7, 22,
-	23, 24, 25,
+	8, 6, 7, 22, 23, 24, 25, 5, 8, 6,
+	7, 22, 23, 24, 25, 5, 8, 6, 7, 22,
+	23, 24, 25, 5, 8, 6, 7, 22, 23, 24,
+	25, 5, 8, 6, 7, 22, 23, 24, 25, 5,
+	8, 6, 7, 22, 23, 24, 25, 5, 8, 6,
+	7, 22, 23, 24, 25,
 }
 var QueryDef = [...]int{
 
 	0, -2, 1, 0, 0, 0, 0, 0, 0, 3,
 	0, 0, 0, 0, 0, 0, 0, 0, 4, 5,
-	2, 6, 10, 12, 14, 24, 25, 26, 27, 7,
-	11, 13, 15, 28, 29, 30, 31, 8, 9, 16,
-	18, 36, 37, 38, 39, 17, 19, 32, 33, 34,
-	35, 20, 22, 44, 45, 46, 47, 21, 23, 40,
-	41, 42, 43,
+	2, 6, 14, 22, 28, 38, 39, 40, 41, 7,
+	15, 25, 29, 42, 43, 44, 45, 8, 16, 31,
+	33, 46, 47, 48, 49, 9, 17, 30, 32, 50,
+	51, 52, 53, 10, 18, 35, 37, 54, 55, 56,
+	57, 11, 19, 34, 36, 58, 59, 60, 61, 12,
+	20, 23, 26, 62, 63, 64, 68, 13, 21, 24,
+	27, 65, 66, 67, 69,
 }
 var QueryTok1 = [...]int{
 
@@ -765,327 +777,713 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:99
 		{
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 9:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:103
+//line queryparser.y:105
 		{
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 10:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:107
+//line queryparser.y:111
 		{
-			b, _ := strconv.ParseBool(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 11:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:112
+//line queryparser.y:117
 		{
-			b, _ := strconv.ParseBool(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 12:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:117
+//line queryparser.y:123
 		{
-			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
-
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
 		}
 	case 13:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:123
+//line queryparser.y:127
 		{
-			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
-
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
 		}
 	case 14:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:129
+//line queryparser.y:131
 		{
-			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			b, e := strconv.ParseBool(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
 
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
 		}
 	case 15:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:135
+//line queryparser.y:143
 		{
-			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			b, e := strconv.ParseBool(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
 
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
 		}
 	case 16:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:141
+//line queryparser.y:155
 		{
-			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 17:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:147
+//line queryparser.y:161
 		{
-			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 18:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:153
+//line queryparser.y:167
 		{
-			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 19:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:159
+//line queryparser.y:173
 		{
-			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 20:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:165
+//line queryparser.y:179
 		{
-			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 21:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:171
+//line queryparser.y:185
 		{
-			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 22:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:177
+//line queryparser.y:191
 		{
-			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			i, e := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 23:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:183
+//line queryparser.y:204
 		{
-			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 24:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:189
+//line queryparser.y:210
 		{
-			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 25:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:195
+//line queryparser.y:216
 		{
-			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			i, e := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 26:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:201
+//line queryparser.y:229
 		{
-			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 27:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:207
+//line queryparser.y:235
 		{
-			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
-
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	case 28:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:213
+//line queryparser.y:241
 		{
-			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			f, e := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 29:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:219
+//line queryparser.y:254
 		{
-			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			f, e := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 30:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:225
+//line queryparser.y:267
 		{
-			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			i, e := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 31:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:231
+//line queryparser.y:280
 		{
-			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			i, e := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 32:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:237
+//line queryparser.y:293
 		{
-			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			f, e := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 33:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:243
+//line queryparser.y:306
 		{
-			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			f, e := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 34:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:249
+//line queryparser.y:319
 		{
-			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			i, e := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 35:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:255
+//line queryparser.y:332
 		{
-			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			i, e := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 36:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:261
+//line queryparser.y:345
 		{
-			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			f, e := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 37:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:267
+//line queryparser.y:358
 		{
-			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			f, e := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 38:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:273
+//line queryparser.y:371
 		{
-			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			t, e := common.ParseDate(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 39:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:279
+//line queryparser.y:384
 		{
-			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			t, e := common.ParseDateTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 40:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:285
+//line queryparser.y:397
 		{
-			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 41:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:291
+//line queryparser.y:410
 		{
-			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 42:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:297
+//line queryparser.y:423
 		{
-			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			t, e := common.ParseDate(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 43:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:303
+//line queryparser.y:436
 		{
-			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			t, e := common.ParseDateTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 44:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:309
+//line queryparser.y:449
 		{
-			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 45:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:315
+//line queryparser.y:462
 		{
-			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
 			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 46:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:321
+//line queryparser.y:475
 		{
-			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			t, e := common.ParseDate(QueryDollar[3].token.Literal)
 			if e != nil {
-				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
 
-				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
 				break
-			} else {
-				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
 		}
 	case 47:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:333
+//line queryparser.y:488
+		{
+			t, e := common.ParseDateTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 48:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:501
+		{
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 49:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:514
 		{
 			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
 			if e != nil {
-				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
 
-				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
 				break
-			} else {
-				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 50:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:527
+		{
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 51:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:533
+		{
+			t, e := common.ParseDateTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 52:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:546
+		{
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 53:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:559
+		{
+			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 54:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:572
+		{
+			t, e := common.ParseDate(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 55:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:585
+		{
+			t, e := common.ParseDateTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 56:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:598
+		{
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 57:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:611
+		{
+			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 58:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:624
+		{
+			t, e := common.ParseDate(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 59:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:637
+		{
+			t, e := common.ParseDateTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 60:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:650
+		{
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 61:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:663
+		{
+			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
+			if e != nil {
+				ql, _ := Querylex.(*QueryLexerImpl)
+				ql.PositionedError(QueryDollar[3].token.Position, e.Error())
+
+				break
+			}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+
+		}
+	case 62:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:675
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 63:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:681
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 64:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:687
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 65:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:693
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 66:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:699
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 67:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:705
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 68:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:711
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
+		}
+	case 69:
+		QueryDollar = QueryS[Querypt-3 : Querypt+1]
+//line queryparser.y:718
+		{
+			ql, _ := Querylex.(*QueryLexerImpl)
+			ql.PositionedError(QueryDollar[2].token.Position, "invalid operator")
+			break
 		}
 	}
 	goto Querystack /* stack new state and value */
