@@ -227,6 +227,12 @@ t, _ := common.ParseTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
+| IDENT NEQ DURATION
+{
+t, _ := common.ParseDuration($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
 | IDENT LT DATE
 {
 t, _ := common.ParseDate($3.Literal)
@@ -242,6 +248,12 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 | IDENT LT TIME
 {
 t, _ := common.ParseTime($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT LT DURATION
+{
+t, _ := common.ParseDuration($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
@@ -263,6 +275,12 @@ t, _ := common.ParseTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
+| IDENT GT DURATION
+{
+t, _ := common.ParseDuration($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
 | IDENT LTE DATE
 {
 t, _ := common.ParseDate($3.Literal)
@@ -278,6 +296,12 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 | IDENT LTE TIME
 {
 t, _ := common.ParseTime($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT LTE DURATION
+{
+t, _ := common.ParseDuration($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
@@ -305,6 +329,18 @@ break;
     $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 }
 }
+| IDENT GTE DURATION
+ {
+ t, e := common.ParseDuration($3.Literal)
+ if e != nil {
+ 	//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
+
+ Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
+ break;
+ } else {
+     $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+ }
+ }
 ;
 
 
