@@ -9,7 +9,7 @@ import __yyfmt__ "fmt"
 //line queryparser.y:6
 
 import (
-	"github.com/publicocean0/queryparser/Common"
+	"github.com/publicocean0/queryparser/common"
 	"regexp"
 	"strconv"
 )
@@ -17,9 +17,9 @@ import (
 //line queryparser.y:23
 type QuerySymType struct {
 	yys   int
-	expr  Common.Expression
-	cond  Common.Condition
-	token Common.Token
+	expr  common.Expression
+	cond  common.Condition
+	token common.Token
 }
 
 const IDENT = 57346
@@ -85,9 +85,9 @@ type QueryLexerImpl struct {
 	src             string
 	pos             int
 	re              *regexp.Regexp
-	Exception       *Common.Exception
-	AST             Common.Expression
-	lastParsedToken *Common.Token
+	Exception       *common.Exception
+	AST             common.Expression
+	lastParsedToken *common.Token
 }
 
 func (l *QueryLexerImpl) PositionedError(pos int, msg string) {
@@ -114,12 +114,12 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 	if l.src[l.pos] == '(' {
 		t = LPAREN
-		lval.token = Common.Token{Position: l.pos, Token: t, Literal: "("}
+		lval.token = common.Token{Position: l.pos, Token: t, Literal: "("}
 		l.pos++
 		return t
 	} else if l.src[l.pos] == ')' {
 		t = RPAREN
-		lval.token = Common.Token{Position: l.pos, Token: t, Literal: ")"}
+		lval.token = common.Token{Position: l.pos, Token: t, Literal: ")"}
 		l.pos++
 		return t
 	}
@@ -137,35 +137,35 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 			// comparator
 			case 18:
 				t = NEQ
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "!="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "!="}
 				break
 			case 20:
 				t = NLIKE
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "!~"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "!~"}
 				break
 			case 22:
 				t = LTE
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "<="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "<="}
 				break
 			case 24:
 				t = GTE
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: ">="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: ">="}
 				break
 			case 26:
 				t = EQ
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "="}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "="}
 				break
 			case 28:
 				t = LIKE
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "~"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "~"}
 				break
 			case 30:
 				t = GT
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: ">"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: ">"}
 				break
 			case 32:
 				t = LT
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "<"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "<"}
 				break
 			case 78:
 				if result[82] != -1 {
@@ -173,32 +173,32 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				} else {
 					t = INT
 				}
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 				// string
 			case 42: //SHIFT
 				t = STRING
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start+1 : l.pos+result[pairIndex+1]-1]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start+1 : l.pos+result[pairIndex+1]-1]}
 				break
 			case 8:
 				t = OR
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "OR"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "OR"}
 				break
 			case 10:
 				t = NOT
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "NOT"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "NOT"}
 				break
 			case 12:
 				t = AND
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: "AND"}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: "AND"}
 				break
 			case 36:
 				t = BOOL
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 			case 44: // gia' sfhittato
 				t = IDENT
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 			case 66:
 				ch := l.src[l.pos+result[66]]
@@ -229,7 +229,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 						return -1
 					}
 				}
-				lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
+				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
 				break
 			case 48:
 				s := ""
@@ -250,12 +250,12 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 						s += "+00:00"
 					}
 
-					lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
+					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
 
 				} else {
 					t = DATE
 					s += "T00:00:00+00:00"
-					lval.token = Common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
 				}
 
 				break
@@ -279,7 +279,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 }
 
 func (l *QueryLexerImpl) Error(e string) {
-	l.Exception = &Common.Exception{}
+	l.Exception = &common.Exception{}
 
 	if l.lastParsedToken == nil {
 		s := l.src[l.pos:]
@@ -725,7 +725,7 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:69
 		{
-			QueryVAL.expr = Common.SubExpression{Expr: QueryDollar[2].expr}
+			QueryVAL.expr = common.SubExpression{Expr: QueryDollar[2].expr}
 			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
 
 		}
@@ -733,14 +733,14 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-2 : Querypt+1]
 //line queryparser.y:74
 		{
-			QueryVAL.expr = Common.NotExpression{Expr: QueryDollar[2].expr}
+			QueryVAL.expr = common.NotExpression{Expr: QueryDollar[2].expr}
 			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
 		}
 	case 4:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:78
 		{
-			QueryVAL.expr = Common.BiExpression{BooleanOperator: QueryDollar[2].token, Left: QueryDollar[1].expr, Right: QueryDollar[3].expr}
+			QueryVAL.expr = common.BiExpression{BooleanOperator: QueryDollar[2].token, Left: QueryDollar[1].expr, Right: QueryDollar[3].expr}
 			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
 
 		}
@@ -748,53 +748,53 @@ Querydefault:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:83
 		{
-			QueryVAL.expr = Common.BiExpression{BooleanOperator: QueryDollar[2].token, Left: QueryDollar[1].expr, Right: QueryDollar[3].expr}
+			QueryVAL.expr = common.BiExpression{BooleanOperator: QueryDollar[2].token, Left: QueryDollar[1].expr, Right: QueryDollar[3].expr}
 			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
 		}
 	case 6:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:91
 		{
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
 		}
 	case 7:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:95
 		{
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
 		}
 	case 8:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:99
 		{
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
 		}
 	case 9:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:103
 		{
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: QueryDollar[3].token.Literal}}
 		}
 	case 10:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:107
 		{
 			b, _ := strconv.ParseBool(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
 		}
 	case 11:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:112
 		{
 			b, _ := strconv.ParseBool(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: b}}
 		}
 	case 12:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:117
 		{
 			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 13:
@@ -802,7 +802,7 @@ Querydefault:
 //line queryparser.y:123
 		{
 			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 14:
@@ -810,7 +810,7 @@ Querydefault:
 //line queryparser.y:129
 		{
 			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 15:
@@ -818,7 +818,7 @@ Querydefault:
 //line queryparser.y:135
 		{
 			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 16:
@@ -826,7 +826,7 @@ Querydefault:
 //line queryparser.y:141
 		{
 			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 17:
@@ -834,7 +834,7 @@ Querydefault:
 //line queryparser.y:147
 		{
 			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 18:
@@ -842,7 +842,7 @@ Querydefault:
 //line queryparser.y:153
 		{
 			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 19:
@@ -850,7 +850,7 @@ Querydefault:
 //line queryparser.y:159
 		{
 			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 20:
@@ -858,7 +858,7 @@ Querydefault:
 //line queryparser.y:165
 		{
 			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 21:
@@ -866,7 +866,7 @@ Querydefault:
 //line queryparser.y:171
 		{
 			i, _ := strconv.ParseInt(QueryDollar[3].token.Literal, 10, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: i}}
 
 		}
 	case 22:
@@ -874,7 +874,7 @@ Querydefault:
 //line queryparser.y:177
 		{
 			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 23:
@@ -882,211 +882,211 @@ Querydefault:
 //line queryparser.y:183
 		{
 			f, _ := strconv.ParseFloat(QueryDollar[3].token.Literal, 64)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: f}}
 
 		}
 	case 24:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:189
 		{
-			t, _ := Common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 25:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:195
 		{
-			t, _ := Common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 26:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:201
 		{
-			t, _ := Common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 27:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:207
 		{
-			t, _ := Common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 28:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:213
 		{
-			t, _ := Common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 29:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:219
 		{
-			t, _ := Common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 30:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:225
 		{
-			t, _ := Common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 31:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:231
 		{
-			t, _ := Common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 32:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:237
 		{
-			t, _ := Common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 33:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:243
 		{
-			t, _ := Common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 34:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:249
 		{
-			t, _ := Common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 35:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:255
 		{
-			t, _ := Common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 36:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:261
 		{
-			t, _ := Common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 37:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:267
 		{
-			t, _ := Common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 38:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:273
 		{
-			t, _ := Common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 39:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:279
 		{
-			t, _ := Common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 40:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:285
 		{
-			t, _ := Common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 41:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:291
 		{
-			t, _ := Common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 42:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:297
 		{
-			t, _ := Common.ParseTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 43:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:303
 		{
-			t, _ := Common.ParseDuration(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDuration(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 44:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:309
 		{
-			t, _ := Common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 45:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:315
 		{
-			t, _ := Common.ParseDateTime(QueryDollar[3].token.Literal)
-			QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			t, _ := common.ParseDateTime(QueryDollar[3].token.Literal)
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 
 		}
 	case 46:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:321
 		{
-			t, e := Common.ParseTime(QueryDollar[3].token.Literal)
+			t, e := common.ParseTime(QueryDollar[3].token.Literal)
 			if e != nil {
 				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
 
 				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
 				break
 			} else {
-				QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 			}
 		}
 	case 47:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
 //line queryparser.y:333
 		{
-			t, e := Common.ParseDuration(QueryDollar[3].token.Literal)
+			t, e := common.ParseDuration(QueryDollar[3].token.Literal)
 			if e != nil {
 				//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
 
 				Querylex.Error(e.Error() + " at " + strconv.Itoa(QueryDollar[3].token.Position))
 				break
 			} else {
-				QueryVAL.cond = Common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: Common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+				QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
 			}
 		}
 	}
