@@ -1,4 +1,4 @@
-package common
+package Common
 
 type Exception struct {
 	msg string

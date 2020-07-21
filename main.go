@@ -1,11 +1,11 @@
 package queryparser
 
 import (
-	"github.com/publicocean0/queryparser/common"
+	"github.com/publicocean0/queryparser/Common"
 	"github.com/publicocean0/queryparser/parser"
 )
 
-func Parse(qs string) (*common.Expression, *common.Exception) {
+func Parse(qs string) (*Common.Expression, *Common.Exception) {
 	q := parser.QueryLexerImpl{}
 	q.Init(qs)
 	parser.QueryParse(&q)
