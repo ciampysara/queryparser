@@ -20,7 +20,7 @@ func (l *Exception) Position() int {
 
 func (l *Exception) Cursor() string {
 	m := ""
-	for i := 0; i < l.pos-1; i++ {
+	for i := 0; i < l.pos; i++ {
 		m += "─"
 	}
 	return m + "^"

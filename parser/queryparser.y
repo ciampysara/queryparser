@@ -9,7 +9,7 @@ import (
 
 	
 
-     "time"
+
 	"strconv"
 	"regexp"
 	"github.com/publicocean0/queryparser/common"
@@ -48,6 +48,7 @@ import (
 %token <token> DATE
 %token <token> DATETIME
 %token <token> TIME
+%token <token> DURATION
 
 %type <expr> expr
 %type <cond> condition
@@ -186,109 +187,115 @@ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3
 }
 | IDENT EQ DATE
 {
-t, _ := common.Date.Parse($3.Literal)
+t, _ := common.ParseDate($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT EQ DATETIME
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDateTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT EQ TIME
 {
-t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+t, _ := common.ParseTime($3.Literal)
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+
+}
+| IDENT EQ DURATION
+{
+t, _ := common.ParseDuration($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT NEQ DATE
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDate($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  NEQ  DATETIME
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDateTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT NEQ TIME
 {
-t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+t, _ := common.ParseTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LT DATE
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDate($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  LT  DATETIME
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDateTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LT TIME
 {
-t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+t, _ := common.ParseTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GT DATE
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDate($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  GT  DATETIME
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDateTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GT TIME
 {
-t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+t, _ := common.ParseTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LTE DATE
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDate($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  LTE  DATETIME
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDateTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT LTE TIME
 {
-t, _ := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+t, _ := common.ParseTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GTE DATE
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDate($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT  GTE  DATETIME
 {
-t, _ := time.Parse(time.RFC3339, $3.Literal)
+t, _ := common.ParseDateTime($3.Literal)
 $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
 
 }
 | IDENT GTE TIME
 {
-t, e := time.Parse(time.RFC3339, "1970-01-01T"+$3.Literal)
+t, e := common.ParseTime($3.Literal)
 if e != nil {
 	//(&(Querylex.(QueryLexerImpl))).SetLastParsedToken(&QueryDollar[3].token)
 			
@@ -320,7 +327,7 @@ func (l *QueryLexerImpl) PositionedError(pos int,msg string) {
 func (l *QueryLexerImpl) Init(src string) {
 	l.src = src
 	l.pos = 0
-	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"(?:[^"\\]|\\.)*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{2}\-\d{2})(T(\d{1,2}\:\d{2}((\:\d{2}(\:\d{2})?)?)(([-+]\d{2}\:\d{2})|Z)?))?)|(\d{1,2}\:\d{2}((\:\d{2}(\:\d{2})?)?)(([-+]\d{2}\:\d{2})|Z)?))|(?P<number>([-+]?\d+)(\.\d+)?))`)
+	l.re = regexp.MustCompile(`^((?P<op>((OR)|(NOT)|(AND)))|(?P<comp>((\!\=)|(\!\~)|(\<\=)|(\>\=)|(\=)|(\~)|(\>)|(\<)))|(?P<bool>((true)|(false)))|(?P<string>\"(?:[^"\\]|\\.)*\")|(?P<ident>[A-Za-z]\w*)|(?P<time>((\d{4}\-\d{2}\-\d{2})(T(\d{1,2}\:\d{2}((\:\d{2}(\:\d{2})?)?)(([-+]\d{2}\:\d{2})|Z)?))?)|([-+]?\d{1,2}\:\d{2}((\:\d{2}(\:\d{2})?)?)(([-+]\d{2}\:\d{2})|Z)?))|(?P<number>([-+]?\d+)(\.\d+)?))`)
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
@@ -424,7 +431,13 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 			case 66:
-				t = TIME
+				ch:=l.src[l.pos+result[66]]
+				if ch == '+' || ch == '-' {
+					t = DURATION
+				} else {
+					t = TIME
+				}
+
 				s := ""
 				var index = pairIndex + 1
 				if result[70] == -1 {
@@ -434,11 +447,17 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 						index = 74
 					}
 				}
-				if result[74] == -1 {
-					s += "+00:00"
-				} else if (l.src[result[74]]=='Z'){
-					index--
-					s += "+00:00"
+				if t == TIME {
+					if result[74] == -1 {
+						s += "+00:00"
+					} else if l.src[result[74]] == 'Z' {
+						index--
+						s += "+00:00"
+					}
+				} else {
+					if result[74] != -1 {
+						return -1
+					}
 				}
 				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[index]] + s}
 				break
@@ -456,7 +475,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 					}
 					if result[62] == -1 {
 						s += "+00:00"
-					}else if (l.src[result[62]]=='Z'){
+					} else if l.src[result[62]] == 'Z' {
 						index--
 						s += "+00:00"
 					}
@@ -488,6 +507,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 	return t
 }
+
 
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
