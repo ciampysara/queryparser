@@ -353,11 +353,15 @@ type QueryLexerImpl struct {
 	re              *regexp.Regexp
 	Exception       *common.Exception
 	AST             common.Expression
-	lastParsedToken *common.Token
+
 }
 
-func (l *QueryLexerImpl) PositionedError(pos int,msg string) {
-	
+func (l *QueryLexerImpl) PositionedError(pos int, msg string) {
+	l.Exception = &common.Exception{}
+
+
+	s := l.src[pos:]
+	l.Exception.Init(pos, msg +" at "+s)
 }
 
 func (l *QueryLexerImpl) Init(src string) {
@@ -467,7 +471,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start : l.pos+result[pairIndex+1]]}
 				break
 			case 66:
-				ch:=l.src[l.pos+result[66]]
+				ch := l.src[l.pos+result[66]]
 				if ch == '+' || ch == '-' {
 					t = DURATION
 				} else {
@@ -532,7 +536,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				if l.pos != len && l.src[l.pos] != ' ' {
 					t = -1
 					l.pos -= result[pairIndex+1]
-					l.lastParsedToken = nil
+
 					return t
 				}
 			}
@@ -544,17 +548,11 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 	return t
 }
 
-
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
 
-	if l.lastParsedToken == nil {
+
 		s := l.src[l.pos:]
 		l.Exception.Init(l.pos, e+" at "+s)
-	} else {
-		s := l.src[l.lastParsedToken.Position:]
-		l.Exception.Init(l.pos, e+" at "+s)
-	}
+
 }
-
-

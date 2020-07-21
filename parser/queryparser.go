@@ -82,16 +82,18 @@ const QueryInitialStackSize = 16
 /*  start  of  programs  */
 
 type QueryLexerImpl struct {
-	src             string
-	pos             int
-	re              *regexp.Regexp
-	Exception       *common.Exception
-	AST             common.Expression
-	lastParsedToken *common.Token
+	src       string
+	pos       int
+	re        *regexp.Regexp
+	Exception *common.Exception
+	AST       common.Expression
 }
 
 func (l *QueryLexerImpl) PositionedError(pos int, msg string) {
+	l.Exception = &common.Exception{}
 
+	s := l.src[pos:]
+	l.Exception.Init(pos, msg+" at "+s)
 }
 
 func (l *QueryLexerImpl) Init(src string) {
@@ -266,7 +268,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				if l.pos != len && l.src[l.pos] != ' ' {
 					t = -1
 					l.pos -= result[pairIndex+1]
-					l.lastParsedToken = nil
+
 					return t
 				}
 			}
@@ -281,13 +283,9 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
 
-	if l.lastParsedToken == nil {
-		s := l.src[l.pos:]
-		l.Exception.Init(l.pos, e+" at "+s)
-	} else {
-		s := l.src[l.lastParsedToken.Position:]
-		l.Exception.Init(l.pos, e+" at "+s)
-	}
+	s := l.src[l.pos:]
+	l.Exception.Init(l.pos, e+" at "+s)
+
 }
 
 //line yacctab:1
