@@ -249,6 +249,9 @@ func (l *Time) ZoneMinutes() uint8 {
 func (l *Time) ZoneHour() int8 {
 	return l.zoneHour
 }
+func (l *Time) ZoneOffset() int {
+	return (int(l.zoneHour)*60 + int(l.zoneMinutes)) * 60
+}
 
 func (l *Duration) Hour() int8 {
 	return l.hour
