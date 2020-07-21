@@ -71,10 +71,7 @@ expr : condition {
 	Querylex.(*QueryLexerImpl).AST = $$
 
 }
-|  NOT expr  %prec NOT {
-	$$ = common.NotExpression{Expr:$2}
-	Querylex.(*QueryLexerImpl).AST = $$
-}
+
 | expr AND expr {
 	$$ = common.BiExpression{BooleanOperator:$2,Left:$1,Right:$3}
     Querylex.(*QueryLexerImpl).AST = $$
@@ -83,7 +80,10 @@ expr : condition {
 | expr OR expr {
 	$$ = common.BiExpression{BooleanOperator:$2,Left:$1,Right:$3}
 	Querylex.(*QueryLexerImpl) .AST= $$
-}
+} | NOT expr {
+  	$$ = common.BiExpression{BooleanOperator:$1,Left:$2}
+  	Querylex.(*QueryLexerImpl) .AST= $$
+  }
 ;
 
 
@@ -377,7 +377,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT EQ DATETIME
@@ -390,7 +390,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT EQ TIME
@@ -403,7 +403,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT EQ DURATION
@@ -416,7 +416,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT NEQ DATE
@@ -429,7 +429,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT  NEQ  DATETIME
@@ -442,7 +442,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT NEQ TIME
@@ -455,7 +455,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT NEQ DURATION
@@ -468,7 +468,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT LT DATE
@@ -481,7 +481,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT  LT  DATETIME
@@ -494,7 +494,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT LT TIME
@@ -507,7 +507,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT LT DURATION
@@ -520,13 +520,13 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT GT DATE
 {
 t, _ := common.ParseDate($3.Literal)
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT  GT  DATETIME
@@ -539,7 +539,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT GT TIME
@@ -552,7 +552,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT GT DURATION
@@ -565,7 +565,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT LTE DATE
@@ -578,7 +578,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT  LTE  DATETIME
@@ -591,7 +591,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT LTE TIME
@@ -604,7 +604,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT LTE DURATION
@@ -617,7 +617,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT GTE DATE
@@ -630,7 +630,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT  GTE  DATETIME
@@ -643,7 +643,7 @@ if e != nil {
 
 				break
 }
-$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+$$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT GTE TIME
@@ -656,7 +656,7 @@ if e != nil {
 
 				break
 }
- $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
 }
 | IDENT GTE DURATION
@@ -669,7 +669,7 @@ if e != nil {
 
  				break
  }
- $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:t}}
+ $$ = common.Condition{Variable:$1,Comparator:$2,Value:common.TokenValue{Token:$3.Token,Content:*t}}
 
  }| IDENT LIKE DATE
   {
@@ -735,12 +735,15 @@ type QueryLexerImpl struct {
 
 }
 
+
+
+
+
 func (l *QueryLexerImpl) PositionedError(pos int, msg string) {
 	l.Exception = &common.Exception{}
 
-
 	s := l.src[pos:]
-	l.Exception.Init(pos, msg +" at "+s)
+	l.Exception.Init(pos, msg+" at "+s)
 }
 
 func (l *QueryLexerImpl) Init(src string) {
@@ -750,6 +753,9 @@ func (l *QueryLexerImpl) Init(src string) {
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
+	if l.Exception!=nil{
+		return -1
+	}
 	var t int = -1
 	len := len(l.src)
 	// remove all spaces on the left
@@ -915,7 +921,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				if l.pos != len && l.src[l.pos] != ' ' {
 					t = -1
 					l.pos -= result[pairIndex+1]
-
+                    l.PositionedError(l.pos,"invalid token")
 					return t
 				}
 			}
@@ -926,7 +932,6 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 	return t
 }
-
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
 

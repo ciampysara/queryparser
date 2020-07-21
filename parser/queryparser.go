@@ -103,6 +103,9 @@ func (l *QueryLexerImpl) Init(src string) {
 }
 
 func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
+	if l.Exception != nil {
+		return -1
+	}
 	var t int = -1
 	len := len(l.src)
 	// remove all spaces on the left
@@ -268,7 +271,7 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 				if l.pos != len && l.src[l.pos] != ' ' {
 					t = -1
 					l.pos -= result[pairIndex+1]
-
+					l.PositionedError(l.pos, "invalid token")
 					return t
 				}
 			}
@@ -279,7 +282,6 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 	return t
 }
-
 func (l *QueryLexerImpl) Error(e string) {
 	l.Exception = &common.Exception{}
 
@@ -340,7 +342,7 @@ var QueryR1 = [...]int{
 }
 var QueryR2 = [...]int{
 
-	0, 1, 3, 2, 3, 3, 3, 3, 3, 3,
+	0, 1, 3, 3, 3, 2, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
 	3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
@@ -362,8 +364,8 @@ var QueryChk = [...]int{
 }
 var QueryDef = [...]int{
 
-	0, -2, 1, 0, 0, 0, 0, 0, 0, 3,
-	0, 0, 0, 0, 0, 0, 0, 0, 4, 5,
+	0, -2, 1, 0, 0, 0, 0, 0, 0, 5,
+	0, 0, 0, 0, 0, 0, 0, 0, 3, 4,
 	2, 6, 14, 22, 28, 38, 39, 40, 41, 7,
 	15, 25, 29, 42, 43, 44, 45, 8, 16, 31,
 	33, 46, 47, 48, 49, 9, 17, 30, 32, 50,
@@ -740,25 +742,25 @@ Querydefault:
 
 		}
 	case 3:
-		QueryDollar = QueryS[Querypt-2 : Querypt+1]
-//line queryparser.y:74
-		{
-			QueryVAL.expr = common.NotExpression{Expr: QueryDollar[2].expr}
-			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
-		}
-	case 4:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:78
+//line queryparser.y:75
 		{
 			QueryVAL.expr = common.BiExpression{BooleanOperator: QueryDollar[2].token, Left: QueryDollar[1].expr, Right: QueryDollar[3].expr}
 			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
 
 		}
-	case 5:
+	case 4:
 		QueryDollar = QueryS[Querypt-3 : Querypt+1]
-//line queryparser.y:83
+//line queryparser.y:80
 		{
 			QueryVAL.expr = common.BiExpression{BooleanOperator: QueryDollar[2].token, Left: QueryDollar[1].expr, Right: QueryDollar[3].expr}
+			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
+		}
+	case 5:
+		QueryDollar = QueryS[Querypt-2 : Querypt+1]
+//line queryparser.y:83
+		{
+			QueryVAL.expr = common.BiExpression{BooleanOperator: QueryDollar[1].token, Left: QueryDollar[2].expr}
 			Querylex.(*QueryLexerImpl).AST = QueryVAL.expr
 		}
 	case 6:
@@ -1102,7 +1104,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 39:
@@ -1116,7 +1118,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 40:
@@ -1130,7 +1132,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 41:
@@ -1144,7 +1146,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 42:
@@ -1158,7 +1160,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 43:
@@ -1172,7 +1174,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 44:
@@ -1186,7 +1188,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 45:
@@ -1200,7 +1202,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 46:
@@ -1214,7 +1216,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 47:
@@ -1228,7 +1230,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 48:
@@ -1242,7 +1244,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 49:
@@ -1256,7 +1258,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 50:
@@ -1264,7 +1266,7 @@ Querydefault:
 //line queryparser.y:527
 		{
 			t, _ := common.ParseDate(QueryDollar[3].token.Literal)
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 51:
@@ -1278,7 +1280,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 52:
@@ -1292,7 +1294,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 53:
@@ -1306,7 +1308,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 54:
@@ -1320,7 +1322,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 55:
@@ -1334,7 +1336,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 56:
@@ -1348,7 +1350,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 57:
@@ -1362,7 +1364,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 58:
@@ -1376,7 +1378,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 59:
@@ -1390,7 +1392,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 60:
@@ -1404,7 +1406,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 61:
@@ -1418,7 +1420,7 @@ Querydefault:
 
 				break
 			}
-			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: t}}
+			QueryVAL.cond = common.Condition{Variable: QueryDollar[1].token, Comparator: QueryDollar[2].token, Value: common.TokenValue{Token: QueryDollar[3].token.Token, Content: *t}}
 
 		}
 	case 62:
