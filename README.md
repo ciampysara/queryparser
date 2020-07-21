@@ -3,9 +3,9 @@
 Parser per building a dinamic conditional expression
 
 The syntax is similar to sql where condition:
- - type accepted: int,float,boolean,string
+ - type accepted: int,float,boolean,string(with double quote delimiters),date(yyyy-mm-dd), time(hh:mm(:ss([+-]hh:mm))), datetime, duration(time without timezone starting with + or -)
  - variable with letter,digit or underscore
- - comparator =,!=,<,>,>=,<=,~(match),!~
+ - comparator =,!=,<,>,>=,<=,~(match), !~(NOT MATCH)
  - boolean operators: AND, OR, NOT
  
 
