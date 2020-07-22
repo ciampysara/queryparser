@@ -105,10 +105,10 @@ func (l *Date) String() string {
 	return str
 }
 func (l *DateTime) Date() Date {
-	return l.Date()
+	return l.date
 }
 func (l *DateTime) Time() Time {
-	return l.Time()
+	return l.time
 }
 func (l DateTime) String() string {
 
