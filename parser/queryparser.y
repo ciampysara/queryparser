@@ -909,8 +909,8 @@ func (l *QueryLexerImpl) Lex(lval *QuerySymType) int {
 
 				} else {
 					t = DATE
-					s += "T00:00:00+00:00"
-					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] + s}
+
+					lval.token = common.Token{Position: l.pos + start, Token: t, Literal: l.src[start:l.pos+result[pairIndex+1]] }
 				}
 
 				break
