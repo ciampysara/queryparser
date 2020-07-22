@@ -81,7 +81,7 @@ expr : condition {
 	$$ = common.BiExpression{BooleanOperator:$2,Left:$1,Right:$3}
 	Querylex.(*QueryLexerImpl) .AST= $$
 } | NOT expr {
-  	$$ = common.BiExpression{BooleanOperator:$1,Left:$2}
+  	$$ = common.NotExpression{Expr:$2}
   	Querylex.(*QueryLexerImpl) .AST= $$
   }
 ;

@@ -303,7 +303,7 @@ type NotExpression struct {
 }
 
 func (l NotExpression) String() string {
-	return "(" + (l.Expr).String() + ")"
+	return "NOT " + (l.Expr).String()
 }
 
 type BiExpression struct {
