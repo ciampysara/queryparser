@@ -8,7 +8,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	src := "     aa  =    \"10:11:12+13:14\"   "
+	src := "   dataopen =  2020-07-10  "
 	q, exception := queryparser.Parse(src)
 	if exception != nil {
 		fmt.Println(exception.Error() + ":\r\n" + src + "\r\n" + exception.Cursor())
