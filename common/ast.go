@@ -313,9 +313,11 @@ type BiExpression struct {
 }
 
 func (l BiExpression) String() string {
-	s := (l.Left).String() + " " + (l.BooleanOperator).Literal
+	var s string
 	if l.Right != nil {
-		s += " " + (l.Right).String()
+		s = (l.Left).String() + " " + (l.BooleanOperator).Literal + " " + (l.Right).String()
+	} else {
+		s = (l.BooleanOperator).Literal + " " + (l.Left).String()
 	}
 	return s
 }
